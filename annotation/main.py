@@ -134,14 +134,14 @@ def annotate_problem_context(args):
         p_index = 1 if args.context else 0
     else:
         p_index = 0
-    need_context = st.radio('是否需要添加上下文 [context?]', ('否', '是'), key=f"need_context_{st.session_state.get('input_reset_counter', 0)}", index=p_index)
+    need_context = st.radio('是否需要添加上下文', ('否', '是'), key=f"need_context_{st.session_state.get('input_reset_counter', 0)}", index=p_index)
     args.need_context = need_context
     if need_context == '是':
-        context = st.text_area('上下文 [context*]', value=args.context if st.session_state.get('modify_mode', False) else '', key=f"context_{st.session_state.get('input_reset_counter', 0)}")
+        context = st.text_area('上下文', value=args.context if st.session_state.get('modify_mode', False) else '', key=f"context_{st.session_state.get('input_reset_counter', 0)}")
         args.context = context
         st.markdown('上下文预览:')
         st.markdown(context, unsafe_allow_html=True)
-    problem = st.text_area('题干 [problem*]', value=args.problem if st.session_state.get('modify_mode', False) else '', key=f"problem_{st.session_state.get('input_reset_counter', 0)}")
+    problem = st.text_area('**题干**', value=args.problem if st.session_state.get('modify_mode', False) else '', key=f"problem_{st.session_state.get('input_reset_counter', 0)}")
     args.problem = problem
     st.markdown('题干预览:')
     st.markdown(problem, unsafe_allow_html=True)
@@ -150,7 +150,7 @@ def annotate_problem_context(args):
         p_index = list(answer_type_options.keys()).index(args.answer_type)
     else:
         p_index = 0
-    answer_type = st.selectbox('答案类型 [answer_type*]', options=list(answer_type_options.keys()), format_func=lambda x: f'{x}: {answer_type_options[x]}', index=p_index)
+    answer_type = st.selectbox('**答案类型**', options=list(answer_type_options.keys()), format_func=lambda x: f'{x}: {answer_type_options[x]}', index=p_index)
     args.answer_type = answer_type
 
 def annotate_solution(args):
@@ -161,15 +161,16 @@ def annotate_solution(args):
     have_solution = st.radio('是否有解析', ('否', '是'), index=p_index, key=f"have_solution_{st.session_state.get('input_reset_counter', 0)}")
     args.have_solution = have_solution
     if have_solution == "是":
-        solution = st.text_area('解析 [solution]', value=args.solution if st.session_state.get('modify_mode', False) else '', key=f"solution_{st.session_state.get('input_reset_counter', 0)}")
+        solution = st.text_area('解析', value=args.solution if st.session_state.get('modify_mode', False) else '', key=f"solution_{st.session_state.get('input_reset_counter', 0)}")
         args.solution = solution
         st.markdown('解析预览:')
         st.markdown(solution, unsafe_allow_html=True)
 
 
 def annotate_figures(args):
+    st.write("**注：图片的标注涵盖题干、选择题选项、解析，编号在一道题内连续**")
     p_index = 1 if st.session_state.get('modify_mode', False) and args.figure_exists else 0
-    figure_exists = st.radio('是否有图片[figure?*]', ('否', '是'), key=f"figure_exists_{st.session_state.get('input_reset_counter', 0)}", index = p_index)
+    figure_exists = st.radio('**是否有图片(题干、选项、解析)**', ('否', '是'), key=f"figure_exists_{st.session_state.get('input_reset_counter', 0)}", index = p_index)
     args.figure_exists = figure_exists
     if figure_exists == '是':
         if st.session_state.get('modify_mode', False):
@@ -179,7 +180,7 @@ def annotate_figures(args):
                 p_index = 1
         else:
             p_index = 0
-        figure_dependent = st.radio('该题目是否依赖图片[figure_dependent?]', ('依赖', '不依赖'), key=f"figure_dependent_{st.session_state.get('input_reset_counter', 0)}", index=p_index)
+        figure_dependent = st.radio('该题目是否依赖图片', ('依赖', '不依赖'), key=f"figure_dependent_{st.session_state.get('input_reset_counter', 0)}", index=p_index)
         args.figure_dependent = figure_dependent
         figure_type_options = {
             '1': '几何图形（数学相关，平面、几何等）',
