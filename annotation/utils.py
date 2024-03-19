@@ -19,11 +19,19 @@ def list_files_in_directory(directory):
     file_names = set(os.path.splitext(file)[0] for file in all_files if file.endswith(('.md', '.pdf')))
     return sorted(list(file_names))  # 返回排序后的文件名列表
 
-def load_annotation(file_path):
-    if os.path.exists(file_path):
-        with open(file_path, "r", encoding="utf-8") as file:
-            data = json.load(file)
-        return data
+def load_annotation(folder_path):
+    if os.path.exists(folder_path):
+        # with open(file_path, "r", encoding="utf-8") as file:
+        #     data = json.load(file)
+        # return data
+        annotated_list = []
+        for file in os.listdir(folder_path):
+            file_path = os.path.join(folder_path, file)
+            with open(file_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                annotated_list.append((file[:-5], data))
+        return annotated_list
+            
     return None
 
 
@@ -95,4 +103,7 @@ def save_to_file(data, output_folder, file_timestamp):
     with open(file_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
-        
+def delete_file(output_folder, file_timestamp):
+    file_path = os.path.join(output_folder, f"{file_timestamp}.json")  # 使用提供的时间戳作为文件名
+    if os.path.exists(file_path):
+        os.remove(file_path)
