@@ -129,6 +129,7 @@ def show_annotate(args, column):
         with col_file_name:
             st.text_input('文件名称', value=args.file_name, disabled=True)
 
+
 def annotate_problem_context(args):
     if st.session_state.get('modify_mode', False):
         p_index = 1 if args.context else 0
@@ -141,10 +142,12 @@ def annotate_problem_context(args):
         args.context = context
         st.markdown('上下文预览:')
         st.markdown(context, unsafe_allow_html=True)
-    problem = st.text_area('**题干**', value=args.problem if st.session_state.get('modify_mode', False) else '', key=f"problem_{st.session_state.get('input_reset_counter', 0)}")
+    problem = st.text_area('**题干**', value=args.problem if st.session_state.get('modify_mode', False) else '', key=f"problem_{st.session_state.get('input_reset_counter', 0)}", height=175)
     args.problem = problem
     st.markdown('题干预览:')
     st.markdown(problem, unsafe_allow_html=True)
+    # annotate_figures_auto(args)
+    # st.markdown(replace_url_with_not(problem, st.session_state.figure_urls) if args.figure_exists else problem, unsafe_allow_html=True)
     
     if st.session_state.get('modify_mode', False):
         p_index = list(answer_type_options.keys()).index(args.answer_type)
@@ -165,7 +168,9 @@ def annotate_solution(args):
         args.solution = solution
         st.markdown('解析预览:')
         st.markdown(solution, unsafe_allow_html=True)
-
+        # annotate_figures_auto(args)
+        # st.markdown(replace_url_with_not(solution, st.session_state.figure_urls) if args.figure_exists else solution, unsafe_allow_html=True)
+    
 
 def annotate_figures(args):
     st.write("**注：图片的标注涵盖题干、选择题选项、解析，编号在一道题内连续**")
@@ -224,6 +229,72 @@ def annotate_figures(args):
                 if delete_button:
                     delete_option(i, 'figure_urls')
                     st.experimental_rerun()
+
+def annotate_figures_auto(args):
+    option_content = " ".join(st.session_state.get('options_list', "")) if args.answer_type in ['SC', 'MC'] else ""
+    try:
+        solution = args.solution if args.solution else ""
+    except Exception as e:
+        solution = ''
+    text_contain_fig = args.problem + option_content + solution
+    url_dict = find_figure_urls(text_contain_fig)
+    if url_dict:
+        st.write("**检测出本题有图片**")
+        args.figure_exists = "是"
+        if st.session_state.get('modify_mode', False):
+            if args.figure_dependent or args.figure_dependent == None:
+                p_index = 0
+            else:
+                p_index = 1
+        else:
+            p_index = 0
+        figure_dependent = st.radio('该题目是否依赖图片', ('依赖', '不依赖'), key=f"figure_dependent_{st.session_state.get('input_reset_counter', 0)}", index=p_index)
+        args.figure_dependent = figure_dependent
+        figure_type_options = {
+            '1': '几何图形（数学相关，平面、几何等）',
+            '2': '任何图表（表格、柱状图、折线图等表示统计数据信息的）',
+            '3': '自然风光（地理风景、星空）',
+            '4': '科学相关（如物理示意图、化学有机物、生物细胞 基因、地理地图、工程机械等）',
+            '5': '抽象物体（抽象物体和概念，可能包括符号、算法图、流程图等）',
+            '6': '其他',
+        }
+        if 'figure_urls' not in st.session_state:
+            st.session_state.figure_urls = []
+            
+        if st.session_state.get('modify_mode', False) and st.session_state.get('refresh_flag', False):
+            st.session_state.figure_urls = []
+            if args.figure_urls:
+                for figure_id in args.figure_urls.keys():
+                    st.session_state.figure_urls.append({'url': args.figure_urls[figure_id]['url'], 'type': args.figure_urls[figure_id]['type']})
+        elif st.session_state.get('modify_mode', False) and not st.session_state.get('refresh_flag', False):
+            existing_urls = [figure['url'] for figure in st.session_state.figure_urls]
+            updated_figure_urls = []
+            for url in url_dict.values():
+                if url in existing_urls:
+                    matching_figure = next((figure for figure in st.session_state.figure_urls if figure['url'] == url), None)
+                    if matching_figure:
+                        updated_figure_urls.append({"url": url, "type": matching_figure["type"]})
+                else:
+                    updated_figure_urls.append({"url": url, "type": None})
+            st.session_state.figure_urls = updated_figure_urls
+        else:
+            st.session_state.figure_urls = [{'url': url, 'type': None} for url in url_dict.values()]
+        
+        for i, entry in enumerate(st.session_state.figure_urls):
+            col1, col2, col3 = st.columns([3, 6, 3])  # 分配空间
+            url = entry['url']
+            try:
+                col1.image(url, caption=f'figure{i+1}', use_column_width=True)  # 显示图片
+            except Exception as e:
+                col1.write("Failed!")
+            p_index = list(figure_type_options.keys()).index(entry['type']) if st.session_state.get('modify_mode', False) and entry['type'] else 0
+            selected_type = col2.selectbox(f"figure{i+1} 的类型", options=list(figure_type_options.keys()), format_func=lambda x: f"{x}: {figure_type_options[x]}", index=p_index, key=f'figure_type_{i}')
+            st.session_state.figure_urls[i]['type'] = selected_type  # 更新图片类型
+            col3.write(f'URL: {url[:50]}...')  # 显示URL
+    else:
+        st.write("**未检测出图片**")
+        args.figure_exists = "否"
+    
 
 def save_annotation(args):
     if st.session_state.get('options_list', []):
@@ -370,7 +441,8 @@ def annotate(args, column):
             annotate_type_human_eval(args)
         
         annotate_solution(args)
-        annotate_figures(args)
+        # annotate_figures(args)
+        annotate_figures_auto(args)
         st.session_state.refresh_flag = False
         
         if st.session_state.get('modify_mode', False):
@@ -389,15 +461,14 @@ def annotate(args, column):
                 next_problem(args)
             with col_next_without_clean:
                 next_problem_without_clean(args)
+        
     
-
 def show_sidebar(args):
-    
     with st.sidebar:
         st.title("此文档已标注:")
         for num, (file_name, json_content) in enumerate(args.annotated_list):
             problem_title = json_content['problem']
-            if st.button(f'**{file_name}**\n\n{problem_title}'):
+            if st.button(f'**{file_name}**\n\n{problem_title[:100]}...'):
                 # args.current_json = json_content
                 st.session_state.modify_mode = True
                 st.session_state.refresh_flag = True
