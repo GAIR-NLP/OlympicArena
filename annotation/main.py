@@ -142,6 +142,8 @@ def annotate_problem_context(args):
         args.context = context
         st.markdown('上下文预览:')
         st.markdown(context, unsafe_allow_html=True)
+    else:
+        args.context = None
     problem = st.text_area('**题干**', value=args.problem if st.session_state.get('modify_mode', False) else '', key=f"problem_{st.session_state.get('input_reset_counter', 0)}", height=175)
     args.problem = problem
     st.markdown('题干预览:')
@@ -170,7 +172,8 @@ def annotate_solution(args):
         st.markdown(solution, unsafe_allow_html=True)
         # annotate_figures_auto(args)
         # st.markdown(replace_url_with_not(solution, st.session_state.figure_urls) if args.figure_exists else solution, unsafe_allow_html=True)
-    
+    else:
+        args.solution = None
 
 def annotate_figures(args):
     st.write("**注：图片的标注涵盖题干、选择题选项、解析，编号在一道题内连续**")
