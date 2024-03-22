@@ -120,7 +120,6 @@ def show_annotate(args, column):
             st.subheader('标注信息')
         with b:
             st.subheader('num: ' + str(st.session_state.question_number))
-        st.markdown('**所有图片用[figure编号]形式标注，如[figure1]**')
         col_subject, col_competition, col_file_name = st.columns(3)
         with col_subject:
             st.text_input('学科', value=args.subject, disabled=True)
