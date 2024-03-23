@@ -233,12 +233,12 @@ def annotate_figures(args):
                     st.experimental_rerun()
 
 def annotate_figures_auto(args):
-    option_content = " ".join(st.session_state.get('options_list', "")) if args.answer_type in ['SC', 'MC'] else ""
+    option_content = "  ".join(st.session_state.get('options_list', "")) if args.answer_type in ['SC', 'MC'] else ""
     try:
         solution = args.solution if args.solution else ""
     except Exception as e:
         solution = ''
-    text_contain_fig = args.problem + option_content + solution
+    text_contain_fig = args.problem + " " + option_content + " " + solution
     url_dict = find_figure_urls(text_contain_fig)
     if url_dict:
         st.write("**检测出本题有图片**")
