@@ -89,7 +89,7 @@ https://cdn.mathpix.com/cropped/2024_03_14_b9e515217a571029676eg-10.jpg?height=4
 
   - 图像类型：选取图像类型
 
-  注意：每张图片标注系统会显示图片预览，如果发现mathpix链接的图片并不是正确对应这道题的，可以用[postimages](https://postimages.org/)重新截取、生成链接
+  注意：**每张图片标注系统会显示图片预览**，如果发现mathpix链接的图片并不是正确对应这道题的，可以用[postimages](https://postimages.org/)重新截取、生成链接
 
 
 #### 不同题型的标注要求
