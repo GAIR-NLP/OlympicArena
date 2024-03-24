@@ -99,7 +99,7 @@ def annotate_type_judge(args): # 判断题
 
 def annotate_type_single_blank(args):
     numeric_answer = st.text_input(
-        "答案 [answer*] (支持TeX，例如: `$\\log_{2}9$`)", 
+        "答案 [answer*] (支持TeX)", 
         key=f"numeric_answer_{st.session_state.get('input_reset_counter', 0)}",
         value=args.answer if st.session_state.get('modify_mode', False) else ''
     )
@@ -134,7 +134,7 @@ def annotate_type_multi_problem(args): # 一题多问
                 
     part_question = st.text_input("名称(例如：the value of $x$)", '', key=f"part_question_{st.session_state.get('input_reset_counter', 0)}")
     part_type = st.selectbox("类型", list(answer_type_options_.keys()), key=f"part_type_{st.session_state.get('input_reset_counter', 0)}", format_func=lambda x: f'{x}: {answer_type_options_[x]}')
-    part_answer = st.text_input("答案 (支持TeX，例如: `$\\log_{2}9$`)", '', key=f"part_answer_{st.session_state.get('input_reset_counter', 0)}")
+    part_answer = st.text_input("答案 (支持TeX)", '', key=f"part_answer_{st.session_state.get('input_reset_counter', 0)}")
     part_unit = st.text_input("单位 (若没有单位，留空)", '', key=f"part_unit_{st.session_state.get('input_reset_counter', 0)}")
     
     if st.button('添加待求量', key=f"add_new_part_{st.session_state.get('input_reset_counter', 0)}"):
@@ -252,7 +252,7 @@ def annotate_type_set(args):  # 集合
 def annotate_type_human_eval(args):
     
     numeric_answer = st.text_input(
-        "答案 [answer*] (支持TeX，例如: `$\\log_{2}9$`)", 
+        "答案 [answer*] (支持TeX)", 
         value=args.answer if st.session_state.get('modify_mode', False) else '',
         key=f"numeric_answer_{st.session_state.get('input_reset_counter', 0)}"
     )
