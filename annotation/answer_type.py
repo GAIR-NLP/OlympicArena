@@ -109,7 +109,7 @@ def annotate_type_single_blank(args):
     unit = st.text_input(
         "单位 [unit*] 若没有单位，此项空着",
         key=f"unit_{st.session_state.get('input_reset_counter', 0)}",
-        value=args.unit if st.session_state.get('modify_mode', False) else ''
+        value=args.unit if st.session_state.get('modify_mode', False) and args.unit else ''
     )
     if unit.strip():
         args.unit = unit
@@ -143,7 +143,7 @@ def annotate_type_multi_problem(args): # 一题多问
                 'question': part_question,
                 'type': part_type,
                 'answer': part_answer,
-                'unit': part_unit if part_unit.strip() else None
+                'unit': part_unit if part_unit and part_unit.strip() else None
             })
     for i, part in enumerate(st.session_state.multi_parts):
         col_part, col_delete = st.columns([9, 1])
@@ -241,7 +241,7 @@ def annotate_type_set(args):  # 集合
 
     unit = st.text_input(
         "单位 [unit*] 若没有单位，此项空着",
-        '',
+        value=args.unit if st.session_state.get('modify_mode', False) and args.unit else '',
         key=f"unit_{st.session_state.get('input_reset_counter', 0)}"
     )
     if unit.strip():
