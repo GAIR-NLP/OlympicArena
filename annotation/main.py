@@ -357,14 +357,14 @@ def save_problem(args):
                 st.session_state.new_file_flag = False
             else:
                 save_to_file(message, args.output_folder, st.session_state.current_time)
-        # if valid:
-        #     save_to_file(message, args.output_folder, st.session_state.question_number)
+            st.experimental_rerun()
 
 def save_modified(args):
     if st.button('保存更改'):
         valid, message = save_annotation(args)
         if valid:
             save_to_file(message, args.output_folder, st.session_state.current_file_name)
+
 
 def quit_modify_mode():
     if st.button('退出修改模式'):
