@@ -532,9 +532,13 @@ if __name__ == "__main__":
     
     subject_competition_dict = {}
     for subject in os.listdir(args.data_dir):
+        if subject == ".DS_Store":
+            continue
         if subject not in subject_competition_dict:
             subject_competition_dict[subject] = []
         for competition in os.listdir(os.path.join(args.data_dir, subject)):
+            if competition == ".DS_Store":
+                continue
             subject_competition_dict[subject].append(competition)
     
     if not os.path.exists(args.output_dir):
