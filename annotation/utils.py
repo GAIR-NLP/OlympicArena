@@ -113,7 +113,7 @@ def delete_file(output_folder, file_timestamp):
         
         
 def find_figure_urls(text):
-    url_pattern = r'https://cdn.mathpix.com/cropped/[^\s]+?\.jpg[^\s]*|https://i.postimg.cc/[^\s]+?/image\.png'
+    url_pattern = r'https://cdn.mathpix.com/cropped/[^\s\)]+?\.jpg[^\s\)]*|https://i.postimg.cc/[^\s\)]+?/image\.png'
     urls = re.findall(url_pattern, text)
     url_dict = {f'figure{i+1}': url for i, url in enumerate(urls)}
     return url_dict
@@ -128,4 +128,4 @@ def replace_url_with_not(text, lst):
     
     
 if __name__ == "__main__":
-    print(find_figure_urls("https://cdn.mathpix.com/cropped/2024_03_14_b9e515217a571029676eg-09.jpg?height=1168&width=726&top_left_y=1432&top_left_x=151"))
+    print(find_figure_urls("https://cdn.mathpix.com/cropped/2024_03_14_b9e515217a571029676eg-09.jpg?height=1168&width=726&top_left_y=1432&top_left_x=151)"))
