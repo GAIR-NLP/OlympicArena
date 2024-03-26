@@ -53,6 +53,15 @@ def show_document(args, column, d):
             selected_file = st.selectbox('选择文件', options=file_names, index=0)
             args.file_name = selected_file
             
+        args.output_folder = os.path.join(args.output_dir, args.subject, args.competition, args.file_name)
+        load(args) # get current question_number
+    
+        # modify
+        args.annotated_list = load_annotation(args.output_folder)
+        if args.annotated_list:
+            show_sidebar(args)    
+        
+            
         if 'display_pdf' not in st.session_state:
             st.session_state['display_pdf'] = True
         display_pdf_option = st.checkbox('开启PDF预览', value=st.session_state['display_pdf'])
@@ -133,12 +142,16 @@ def show_document(args, column, d):
 def load(args):
     if 'question_number' not in st.session_state:
         st.session_state.question_number = 0
-        
+    
     if os.path.exists(args.output_folder):
         files = [f for f in os.listdir(args.output_folder) if os.path.isfile(os.path.join(args.output_folder, f))]
         if files:
             question_number = len(files)
             st.session_state.question_number = question_number
+        else:
+            st.session_state.question_number = 0
+    else:
+        st.session_state.question_number = 0
 
 def show_annotate(args, column):
     with column:
@@ -528,13 +541,13 @@ if __name__ == "__main__":
     
     col1, col2 = init_page()
     show_document(args, col1, subject_competition_dict) # choose subject and competition
-    args.output_folder = os.path.join(args.output_dir, args.subject, args.competition, args.file_name)
-    load(args) # get current question_number
+    # args.output_folder = os.path.join(args.output_dir, args.subject, args.competition, args.file_name)
+    # load(args) # get current question_number
     
-    # modify
-    args.annotated_list = load_annotation(args.output_folder)
-    if args.annotated_list:
-        show_sidebar(args)
+    # # modify
+    # args.annotated_list = load_annotation(args.output_folder)
+    # if args.annotated_list:
+    #     show_sidebar(args)
     
     show_annotate(args, col2)
     annotate(args, col2)
