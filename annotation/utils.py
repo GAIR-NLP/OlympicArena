@@ -27,6 +27,8 @@ def load_annotation(folder_path):
         # return data
         annotated_list = []
         for file in os.listdir(folder_path):
+            if file == ".DS_Store":
+                continue
             file_path = os.path.join(folder_path, file)
             with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
