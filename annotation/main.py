@@ -154,7 +154,7 @@ def load(args):
         st.session_state.question_number = 0
 
 def show_annotate(args, column):
-    with column:
+    with column.container(height=1000):
         a, b = st.columns(2)
         with a:
             st.subheader('标注信息')
@@ -167,6 +167,8 @@ def show_annotate(args, column):
             st.text_input('竞赛名称', value=args.competition, disabled=True)
         with col_file_name:
             st.text_input('文件名称', value=args.file_name, disabled=True)
+        
+        annotate(args, column)
 
 
 def annotate_problem_context(args):
@@ -462,50 +464,50 @@ def next_problem_without_clean(args):
 
 
 def annotate(args, column):
-    with column:
-        
-        annotate_problem_context(args)
-        
-        if args.answer_type == 'SC': # 单选
-            annotate_type_single_choice(args)
-        elif args.answer_type == 'MC': # 多选
-            annotate_type_multi_choice(args)
-        elif args.answer_type == 'TF': # 判断
-            annotate_type_judge(args)
-        elif args.answer_type in ['NV', 'IN', 'EX', 'EQ', 'TUP']: # 数值 区间 表达式 方程(open questions)
-            annotate_type_single_blank(args)
-        elif args.answer_type == 'MPV': # 一题多问
-            annotate_type_multi_problem(args)
-        elif args.answer_type == 'MA': # 一题多解
-            annotate_type_multi_answer(args)
-        elif args.answer_type == 'SET': # 集合
-            annotate_type_set(args)
-        else:
-            annotate_type_human_eval(args)
-        
-        annotate_solution(args)
-        # annotate_figures(args)
-        annotate_figures_auto(args)
-        st.session_state.refresh_flag = False
-        
-        if st.session_state.get('modify_mode', False):
-            col_save, col_delete, col_quit_modify = st.columns(3)
-            with col_save:
-                save_modified(args)
-            with col_delete:
-                delete_problem(args)
-            with col_quit_modify:
-                quit_modify_mode()
-        else: 
-            col_current, col_next, col_next_without_clean = st.columns(3)
-            with col_current:
-                save_problem(args)
-            with col_next:
-                next_problem(args)
-            with col_next_without_clean:
-                next_problem_without_clean(args)
-        
+    # with column.container(height=1000):
     
+    annotate_problem_context(args)
+    
+    if args.answer_type == 'SC': # 单选
+        annotate_type_single_choice(args)
+    elif args.answer_type == 'MC': # 多选
+        annotate_type_multi_choice(args)
+    elif args.answer_type == 'TF': # 判断
+        annotate_type_judge(args)
+    elif args.answer_type in ['NV', 'IN', 'EX', 'EQ', 'TUP']: # 数值 区间 表达式 方程(open questions)
+        annotate_type_single_blank(args)
+    elif args.answer_type == 'MPV': # 一题多问
+        annotate_type_multi_problem(args)
+    elif args.answer_type == 'MA': # 一题多解
+        annotate_type_multi_answer(args)
+    elif args.answer_type == 'SET': # 集合
+        annotate_type_set(args)
+    else:
+        annotate_type_human_eval(args)
+    
+    annotate_solution(args)
+    # annotate_figures(args)
+    annotate_figures_auto(args)
+    st.session_state.refresh_flag = False
+    
+    if st.session_state.get('modify_mode', False):
+        col_save, col_delete, col_quit_modify = st.columns(3)
+        with col_save:
+            save_modified(args)
+        with col_delete:
+            delete_problem(args)
+        with col_quit_modify:
+            quit_modify_mode()
+    else: 
+        col_current, col_next, col_next_without_clean = st.columns(3)
+        with col_current:
+            save_problem(args)
+        with col_next:
+            next_problem(args)
+        with col_next_without_clean:
+            next_problem_without_clean(args)
+    
+
 def show_sidebar(args):
     with st.sidebar:
         st.title("此文档已标注:")
@@ -555,4 +557,4 @@ if __name__ == "__main__":
     #     show_sidebar(args)
     
     show_annotate(args, col2)
-    annotate(args, col2)
+    # annotate(args, col2)
