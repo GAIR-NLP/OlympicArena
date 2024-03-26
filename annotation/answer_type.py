@@ -252,7 +252,7 @@ def annotate_type_set(args):  # 集合
 
 def annotate_type_human_eval(args):
     
-    numeric_answer = st.text_input(
+    numeric_answer = st.text_area(
         "答案 [answer*] (支持TeX)", 
         value=args.answer if st.session_state.get('modify_mode', False) else '',
         key=f"numeric_answer_{st.session_state.get('input_reset_counter', 0)}"
@@ -261,7 +261,7 @@ def annotate_type_human_eval(args):
     args.answer_label = numeric_answer # 字符串
 
     scenario = st.text_input(
-        "问题场景描述（如：化学方程式书写；理由阐述题）",
+        "问题场景描述，如果不好概括，此项留空",
         value=args.scenario if st.session_state.get('modify_mode', False) else '',
         key=f"scenario_{st.session_state.get('input_reset_counter', 0)}"
     )
