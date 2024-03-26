@@ -52,6 +52,11 @@ def show_document(args, column, d):
             file_names = list_files_in_directory(folder_path)
             selected_file = st.selectbox('选择文件', options=file_names, index=0)
             args.file_name = selected_file
+            
+        if 'display_pdf' not in st.session_state:
+            st.session_state['display_pdf'] = True
+        display_pdf_option = st.checkbox('开启PDF预览', value=st.session_state['display_pdf'])
+            
         if selected_file:
             if not os.path.exists(os.path.join(folder_path, f"{selected_file}.md")):
                 st.header(selected_file+'.pdf')
@@ -59,19 +64,29 @@ def show_document(args, column, d):
                 base64_pdf_content = get_pdf_display_content(pdf_file_path)
                 display_pdf(base64_pdf_content)
             else:
-                col_left, col_right = st.columns([3, 2])
-                with col_left:
-                    st.header(selected_file+'.pdf')
-                    pdf_file_path = os.path.join(folder_path, f"{selected_file}.pdf")
-                    base64_pdf_content = get_pdf_display_content(pdf_file_path)
-                    display_pdf(base64_pdf_content)
-                with col_right:
+                if display_pdf_option:
+                    col_left, col_right = st.columns([3, 2])
+                    with col_left:
+                        st.header(selected_file+'.pdf')
+                        pdf_file_path = os.path.join(folder_path, f"{selected_file}.pdf")
+                        base64_pdf_content = get_pdf_display_content(pdf_file_path)
+                        display_pdf(base64_pdf_content)
+                    with col_right:
+                        md_file_path = os.path.join(folder_path, f"{selected_file}.md")
+                        if os.path.exists(md_file_path):
+                            st.header(selected_file+'.md')
+                            with open(md_file_path, "r", encoding='utf-8') as file:
+                                markdown_content = file.read()
+                                st.text_area('hide', markdown_content, height=800, label_visibility="collapsed", key="md1")
+                        else:
+                            st.header('No markdown file provided!')
+                else: # no pdf
                     md_file_path = os.path.join(folder_path, f"{selected_file}.md")
                     if os.path.exists(md_file_path):
                         st.header(selected_file+'.md')
                         with open(md_file_path, "r", encoding='utf-8') as file:
                             markdown_content = file.read()
-                            st.text_area('hide', markdown_content, height=800, label_visibility="collapsed")
+                            st.text_area('hide', markdown_content, height=800, label_visibility="collapsed", key="md2")
                     else:
                         st.header('No markdown file provided!')
         
@@ -86,22 +101,34 @@ def show_document(args, column, d):
                     base64_pdf_content = get_pdf_display_content(pdf_file_path)
                     display_pdf(base64_pdf_content)
             else:
-                enhanced_col_left, enhanced_col_right = st.columns([3, 2])  # Create new variables for clarity
-                with enhanced_col_left:
-                    st.header(selected_file_enhanced + '.pdf')
-                    pdf_file_path = os.path.join(folder_path, f"{selected_file_enhanced}.pdf")
-                    if os.path.exists(pdf_file_path):
-                        base64_pdf_content = get_pdf_display_content(pdf_file_path)
-                        display_pdf(base64_pdf_content)
-                with enhanced_col_right:
+                if display_pdf_option:
+                    enhanced_col_left, enhanced_col_right = st.columns([3, 2])  # Create new variables for clarity
+                    with enhanced_col_left:
+                        st.header(selected_file_enhanced + '.pdf')
+                        pdf_file_path = os.path.join(folder_path, f"{selected_file_enhanced}.pdf")
+                        if os.path.exists(pdf_file_path):
+                            base64_pdf_content = get_pdf_display_content(pdf_file_path)
+                            display_pdf(base64_pdf_content)
+                    with enhanced_col_right:
+                        st.header(selected_file_enhanced + '.md')
+                        md_file_path = os.path.join(folder_path, f"{selected_file_enhanced}.md")
+                        if os.path.exists(md_file_path):
+                            with open(md_file_path, "r", encoding='utf-8') as file:
+                                markdown_content = file.read()
+                                st.text_area('hide', markdown_content, height=800, label_visibility="collapsed", key="md3")
+                        else:
+                            st.header('No markdown file provided!')
+                else:
                     st.header(selected_file_enhanced + '.md')
                     md_file_path = os.path.join(folder_path, f"{selected_file_enhanced}.md")
                     if os.path.exists(md_file_path):
                         with open(md_file_path, "r", encoding='utf-8') as file:
                             markdown_content = file.read()
-                            st.text_area('hide', markdown_content, height=800, label_visibility="collapsed")
+                            st.text_area('hide', markdown_content, height=800, label_visibility="collapsed", key="md4")
                     else:
                         st.header('No markdown file provided!')
+                        
+                        
         
 def load(args):
     if 'question_number' not in st.session_state:
