@@ -33,7 +33,8 @@ def annotate_type_single_choice(args): # 单选题
 
     if st.session_state.options_list:
         option_labels = [chr(65+i) for i in range(len(st.session_state.options_list))]  # A, B, C, D...
-        answer_label = st.selectbox('答案 [answer*]', options=option_labels, key=f"answer_label_{st.session_state.get('input_reset_counter', 0)}") # 字母
+        p_index = option_labels.index(args.answer) if st.session_state.get('modify_mode', False) else 0
+        answer_label = st.selectbox('答案 [answer*]', options=option_labels, index=p_index, key=f"answer_label_{st.session_state.get('input_reset_counter', 0)}") # 字母
         answer = st.session_state.options_list[ord(answer_label) - 65] # 索引，从0开始
         args.answer_label = answer_label
         st.write(f"选中的答案内容: {answer}")
