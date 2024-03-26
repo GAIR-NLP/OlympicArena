@@ -33,6 +33,7 @@ def load_annotation(folder_path):
             with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
                 annotated_list.append((file[:-5], data))
+        annotated_list = sorted(annotated_list)
         return annotated_list
             
     return None
