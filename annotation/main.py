@@ -52,7 +52,8 @@ def show_document(args, column, d):
             file_names = list_files_in_directory(folder_path)
             selected_file = st.selectbox('选择文件', options=file_names, index=0)
             args.file_name = selected_file
-            
+        
+        # 决定了最终存储的位置
         args.output_folder = os.path.join(args.output_dir, args.subject, args.competition, args.file_name)
         load(args) # get current question_number
     
@@ -521,7 +522,7 @@ def show_sidebar(args):
                 st.session_state.current_file_name = file_name
                 for key, value in json_content.items():
                     setattr(args, key, value)
-            elif st.session_state.get('current_json', False):
+            elif st.session_state.get('current_json', False) and st.session_state.get("modify_mode", False):
                 for key, value in st.session_state.current_json.items():
                     setattr(args, key, value)
 
