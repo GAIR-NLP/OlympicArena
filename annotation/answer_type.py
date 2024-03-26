@@ -33,7 +33,7 @@ def annotate_type_single_choice(args): # 单选题
 
     if st.session_state.options_list:
         option_labels = [chr(65+i) for i in range(len(st.session_state.options_list))]  # A, B, C, D...
-        p_index = option_labels.index(args.answer) if st.session_state.get('modify_mode', False) else 0
+        p_index = option_labels.index(args.answer) if st.session_state.get('modify_mode', False) and type(args.answer) == str else 0
         answer_label = st.selectbox('答案 [answer*]', options=option_labels, index=p_index, key=f"answer_label_{st.session_state.get('input_reset_counter', 0)}") # 字母
         answer = st.session_state.options_list[ord(answer_label) - 65] # 索引，从0开始
         args.answer_label = answer_label
@@ -72,7 +72,7 @@ def annotate_type_multi_choice(args): # 多选题
 
     if st.session_state.options_list:
         option_labels = [chr(65+i) for i in range(len(st.session_state.options_list))]  # A, B, C, D...
-        p_list = args.answer if st.session_state.get('modify_mode', False) else None
+        p_list = args.answer if st.session_state.get('modify_mode', False) and type(args.answer)==list else None
         selected_answer_labels = st.multiselect('答案 [answer*]', default=p_list, options=option_labels, key=f"answer_label_{st.session_state.get('input_reset_counter', 0)}")  # Use multiselect instead of selectbox
         selected_answers = [st.session_state.options_list[ord(label) - 65] for label in selected_answer_labels]  # Get selected answers based on labels
         args.answer_label = selected_answer_labels # 字符串列表
@@ -102,7 +102,7 @@ def annotate_type_single_blank(args):
     numeric_answer = st.text_input(
         "答案 [answer*] (支持TeX)", 
         key=f"numeric_answer_{st.session_state.get('input_reset_counter', 0)}",
-        value=args.answer if st.session_state.get('modify_mode', False) else ''
+        value=args.answer if st.session_state.get('modify_mode', False) and type(args.answer)==str else ''
     )
     st.write(f"答案预览: {numeric_answer}")
     args.answer_label = numeric_answer # 字符串
