@@ -144,7 +144,7 @@ def load(args):
         st.session_state.question_number = 0
     
     if os.path.exists(args.output_folder):
-        files = [f for f in os.listdir(args.output_folder) if os.path.isfile(os.path.join(args.output_folder, f))]
+        files = [f for f in os.listdir(args.output_folder) if f.endswith(".json") and os.path.isfile(os.path.join(args.output_folder, f))]
         if files:
             question_number = len(files)
             st.session_state.question_number = question_number
@@ -171,7 +171,7 @@ def show_annotate(args, column):
 
 def annotate_problem_context(args):
     if st.session_state.get('modify_mode', False):
-        p_index = 1 if args.context else 0
+        p_index = 1 if hasattr(args, 'context') and args.context else 0
     else:
         p_index = 0
     need_context = st.radio('是否需要添加上下文', ('否', '是'), key=f"need_context_{st.session_state.get('input_reset_counter', 0)}", index=p_index)
@@ -196,6 +196,7 @@ def annotate_problem_context(args):
         p_index = 0
     answer_type = st.selectbox('**答案类型**', options=list(answer_type_options.keys()), format_func=lambda x: f'{x}: {answer_type_options[x]}', index=p_index)
     args.answer_type = answer_type
+    
 
 def annotate_solution(args):
     if st.session_state.get('modify_mode', False):
