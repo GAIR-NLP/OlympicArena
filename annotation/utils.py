@@ -126,7 +126,36 @@ def replace_url_with_not(text, lst):
     for url in url_2_index.keys():
         text = text.replace(url, "**[figure"+str(url_2_index[url])+"]**")
     return text
+
+def identify_choices(text):
+    patterns = [
+        r"([A-Za-z])[\.\s]+\s*(.+?)(?=(\n[A-Za-z][\.\s]+\s|$\n?))",
+        r"(\d+)[\.\s]+\s*(.+?)(?=(\n\d+[\.\s]+\s|$\n?))"
+    ]
+    for pattern in patterns:
+        lst = []
+        matches = re.finditer(pattern, text, re.DOTALL)
+        for match in matches:
+            if match:
+                choice_description = ' '.join(match.group(2).split())
+                if choice_description not in lst:
+                    lst.append(choice_description)
+        if len(lst) > 1:
+            return lst
+        
+    return None
     
     
 if __name__ == "__main__":
-    print(find_figure_urls("https://cdn.mathpix.com/cropped/2024_03_14_b9e515217a571029676eg-09.jpg?height=1168&width=726&top_left_y=1432&top_left_x=151)"))
+    # print(find_figure_urls("https://cdn.mathpix.com/cropped/2024_03_14_b9e515217a571029676eg-09.jpg?height=1168&width=726&top_left_y=1432&top_left_x=151)"))
+    
+    text = """1. The surface salinity at low latitudes can 
+
+be explained by high evaporation rates
+
+2. The surface salinity at mid latitudes can be explained by high precipitation rates
+
+3. For mid latitudes, the Eastern region receives more abundant rainfall than the Western region
+
+4. For mid latitudes, the Western region receives more abundant rainfall than the Eastern region"""
+    print(identify_choices(text))
