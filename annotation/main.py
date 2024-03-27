@@ -187,6 +187,7 @@ def annotate_problem_context(args):
     else:
         args.context = None
     problem = st.text_area('**题干**', value=args.problem if st.session_state.get('modify_mode', False) else '', key=f"problem_{st.session_state.get('input_reset_counter', 0)}", height=175)
+    # print(problem, st.session_state[f"problem_{st.session_state.get('input_reset_counter', 0)}"], f"problem_{st.session_state.get('input_reset_counter', 0)}")
     args.problem = problem
     st.markdown('题干预览:')
     st.markdown(problem, unsafe_allow_html=True)
@@ -274,7 +275,7 @@ def annotate_figures(args):
                 delete_button = col4.button('删除', key=f'delete_url_{i}')
                 if delete_button:
                     delete_option(i, 'figure_urls')
-                    st.experimental_rerun()
+                    st.rerun()
 
 def annotate_figures_auto(args):
     option_content = "  ".join(st.session_state.get('options_list', "")) if args.answer_type in ['SC', 'MC'] else ""
@@ -401,7 +402,7 @@ def save_problem(args):
                 st.session_state.new_file_flag = False
             else:
                 save_to_file(message, args.output_folder, st.session_state.current_time)
-            st.experimental_rerun()
+            st.rerun()
 
 def save_modified(args):
     if st.button('保存更改'):
@@ -416,7 +417,7 @@ def quit_modify_mode():
         st.session_state.refresh_flag = True # 用来处理列表、字典变量的修改
         st.session_state['reset_needed'] = True
         reset_session_state()
-        st.experimental_rerun()
+        st.rerun()
 
 def delete_problem(args):
     if st.button('删除本题'):
@@ -425,7 +426,7 @@ def delete_problem(args):
         st.session_state.refresh_flag = True
         st.session_state['reset_needed'] = True
         reset_session_state()
-        st.experimental_rerun()
+        st.rerun()
 
 
 def next_problem(args):
@@ -442,7 +443,7 @@ def next_problem(args):
             st.session_state.question_number += 1
             st.session_state['reset_needed'] = True
             reset_session_state()
-            st.experimental_rerun()
+            st.rerun()
         else:
             print(message)
 
@@ -459,7 +460,7 @@ def next_problem_without_clean(args):
             save_to_file(message, args.output_folder, st.session_state.current_time)
             st.session_state.new_file_flag = True
             st.session_state.question_number += 1
-            st.experimental_rerun()
+            st.rerun()
         else:
             print(message)
 
