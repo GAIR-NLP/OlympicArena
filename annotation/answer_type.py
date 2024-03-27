@@ -10,26 +10,50 @@ def annotate_type_single_choice(args): # 单选题
         st.session_state.options_list = []
         if args.options:
             for option_content in args.options.values():
-                st.session_state.options_list.append(option_content)
-        # st.session_state.refresh_flag = False
+                st.session_state.options_list.append(option_content)          
+                
+    # automatic identity choices
+    if 'auto_identity_choices' not in st.session_state:
+        st.session_state['auto_identity_choices'] = False
+    auto_identity_choices = st.checkbox('使用选项自动识别', value=st.session_state['auto_identity_choices'])
+    if auto_identity_choices:
+        raw_text = st.text_area("请输入带有选项的文本(非每个都支持):", value="", key=f"auto_text_input_{st.session_state.get('input_reset_counter', 0)}")
+        if st.button('自动识别'):
+            identified_options = identify_choices(raw_text+"\n")  # Assuming identify_choices is your function
+            if identified_options:
+                st.session_state.options_list = identified_options
+                st.rerun()
+
     
     new_option = st.text_input('添加新选项', value='', key=f"new_option_{st.session_state.get('input_reset_counter', 0)}")
     if st.button('添加选项'):
         if new_option:
+            st.session_state[f'option_{len(st.session_state.options_list)}'] = new_option
             st.session_state.options_list.append(new_option)
+            
+    # reload option_{i}
+    if st.session_state.get('options_list', False):
+        for i in range(len(st.session_state.get('options_list'))):
+            st.session_state[f'option_{i}'] = st.session_state.options_list[i]
+
 
     if 'options_list' in st.session_state:
         for i, option in enumerate(st.session_state.options_list):
             col1, col2 = st.columns([10, 3])
-            option_markdown = f'选项 {chr(65+i)}: {option}'
-            col1.markdown(option_markdown, unsafe_allow_html=True)
-            # annotate_figures_auto(args)
-            # col1.markdown(replace_url_with_not(option_markdown, st.session_state.figure_urls) if args.figure_exists else option_markdown, unsafe_allow_html=True)
-
+            edited_option = col1.text_input(f'选项 {chr(65 + i)}', value=st.session_state[f'option_{i}'], key=f"edited_option_{i}_{st.session_state.get('input_reset_counter', 0)}")
+            col1.markdown("**预览:** "+st.session_state[f'option_{i}'], unsafe_allow_html=True)
+            if edited_option != option:
+                st.session_state.options_list[i] = edited_option
+                st.session_state[f'option_{i}'] = edited_option
+                st.rerun()
+            # col1.markdown(option_markdown, unsafe_allow_html=True)
+            
             delete_button = col2.button('删除', key=f'delete_{i}')
             if delete_button:
                 delete_option(i, 'options_list')
-                st.experimental_rerun()
+                st.session_state.pop(f'option_{i}', None)
+                st.rerun()
+
 
     if st.session_state.options_list:
         option_labels = [chr(65+i) for i in range(len(st.session_state.options_list))]  # A, B, C, D...
@@ -53,22 +77,46 @@ def annotate_type_multi_choice(args): # 多选题
             for option_content in args.options.values():
                 st.session_state.options_list.append(option_content)
                 
+    # automatic identity choices
+    if 'auto_identity_choices' not in st.session_state:
+        st.session_state['auto_identity_choices'] = False
+    auto_identity_choices = st.checkbox('使用选项自动识别', value=st.session_state['auto_identity_choices'])
+    if auto_identity_choices:
+        raw_text = st.text_area("请输入带有选项的文本(非每个都支持):", value="", key=f"auto_text_input_{st.session_state.get('input_reset_counter', 0)}")
+        if st.button('自动识别'):
+            identified_options = identify_choices(raw_text+"\n")  # Assuming identify_choices is your function
+            if identified_options:
+                st.session_state.options_list = identified_options
+                st.rerun()
+                
     new_option = st.text_input('添加新选项', value='', key=f"new_option_{st.session_state.get('input_reset_counter', 0)}")
     if st.button('添加选项'):
         if new_option:
+            st.session_state[f'option_{len(st.session_state.options_list)}'] = new_option
             st.session_state.options_list.append(new_option)
+            
+    # reload option_{i}
+    if st.session_state.get('options_list', False):
+        for i in range(len(st.session_state.get('options_list'))):
+            st.session_state[f'option_{i}'] = st.session_state.options_list[i]
 
     if 'options_list' in st.session_state:
         for i, option in enumerate(st.session_state.options_list):
             col1, col2 = st.columns([10, 3])
-            option_markdown = f'选项 {chr(65+i)}: {option}'
-            col1.markdown(option_markdown, unsafe_allow_html=True)
-            # annotate_figures_auto(args)
-            # col1.markdown(replace_url_with_not(option_markdown, st.session_state.figure_urls) if args.figure_exists else option_markdown, unsafe_allow_html=True)
+            edited_option = col1.text_input(f'选项 {chr(65 + i)}', value=st.session_state[f'option_{i}'], key=f"edited_option_mul_{i}_{st.session_state.get('input_reset_counter', 0)}")
+            col1.markdown("**预览:** "+st.session_state[f'option_{i}'], unsafe_allow_html=True)
+            if edited_option != option:
+                st.session_state.options_list[i] = edited_option
+                st.session_state[f'option_{i}'] = edited_option
+                st.rerun()
+            # option_markdown = f'选项 {chr(65+i)}: {option}'
+            # col1.markdown(option_markdown, unsafe_allow_html=True)
+            
             delete_button = col2.button('删除', key=f'delete_{i}')
             if delete_button:
                 delete_option(i, 'options_list')
-                st.experimental_rerun()
+                st.session_state.pop(f'option_{i}', None)
+                st.rerun()
 
     if st.session_state.options_list:
         option_labels = [chr(65+i) for i in range(len(st.session_state.options_list))]  # A, B, C, D...
@@ -77,7 +125,7 @@ def annotate_type_multi_choice(args): # 多选题
         selected_answers = [st.session_state.options_list[ord(label) - 65] for label in selected_answer_labels]  # Get selected answers based on labels
         args.answer_label = selected_answer_labels # 字符串列表
         if selected_answers:
-            st.write(f"选中的答案内容: {', '.join(selected_answers)}")
+            st.write(f"选中的答案内容: {' || '.join(selected_answers)}")
             # annotate_figures_auto(args)
             # temp_str = ', '.join(selected_answers)
             # st.markdown(f"选中的答案内容: {replace_url_with_not(temp_str, st.session_state.figure_urls) if args.figure_exists else temp_str}", unsafe_allow_html=True)
@@ -152,7 +200,7 @@ def annotate_type_multi_problem(args): # 一题多问
         delete_button = col_delete.button("删除", key=f"delete_part_{i}_{st.session_state.get('input_reset_counter', 0)}")
         if delete_button:
             delete_option(i, 'multi_parts')
-            st.experimental_rerun()
+            st.rerun()
     
     answer_sequence = []
     part_types = []
@@ -200,7 +248,7 @@ def annotate_type_multi_answer(args): # 一题多解
         delete_button = col_delete.button("删除", key=f"delete_solution_{i}_{st.session_state.get('input_reset_counter', 0)}")
         if delete_button:
             delete_option(i, 'multi_solutions')
-            st.experimental_rerun()
+            st.rerun()
     
     answer_label = []
     solution_type_lst = []
@@ -236,7 +284,7 @@ def annotate_type_set(args):  # 集合
         with col_delete:
             if st.button("删除", key=f"delete_element_{i}_{st.session_state.get('input_reset_counter', 0)}"):
                 delete_option(i, 'set_answers')
-                st.experimental_rerun()
+                st.rerun()
 
     args.answer_label = st.session_state.set_answers
 
