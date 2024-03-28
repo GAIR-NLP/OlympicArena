@@ -183,14 +183,14 @@ def annotate_problem_context(args):
         context = st.text_area('上下文', value=args.context if st.session_state.get('modify_mode', False) else '', key=f"context_{st.session_state.get('input_reset_counter', 0)}")
         args.context = context
         st.markdown('上下文预览:')
-        st.markdown(context, unsafe_allow_html=True)
+        st.markdown(normalize_display_figure(context), unsafe_allow_html=True)
     else:
         args.context = None
     problem = st.text_area('**题干**', value=args.problem if st.session_state.get('modify_mode', False) else '', key=f"problem_{st.session_state.get('input_reset_counter', 0)}", height=175)
     # print(problem, st.session_state[f"problem_{st.session_state.get('input_reset_counter', 0)}"], f"problem_{st.session_state.get('input_reset_counter', 0)}")
     args.problem = problem
     st.markdown('题干预览:')
-    st.markdown(problem, unsafe_allow_html=True)
+    st.markdown(normalize_display_figure(problem), unsafe_allow_html=True)
     # annotate_figures_auto(args)
     # st.markdown(replace_url_with_not(problem, st.session_state.figure_urls) if args.figure_exists else problem, unsafe_allow_html=True)
     
@@ -213,7 +213,7 @@ def annotate_solution(args):
         solution = st.text_area('解析', value=args.solution if st.session_state.get('modify_mode', False) else '', key=f"solution_{st.session_state.get('input_reset_counter', 0)}")
         args.solution = solution
         st.markdown('解析预览:')
-        st.markdown(solution, unsafe_allow_html=True)
+        st.markdown(normalize_display_figure(solution), unsafe_allow_html=True)
         # annotate_figures_auto(args)
         # st.markdown(replace_url_with_not(solution, st.session_state.figure_urls) if args.figure_exists else solution, unsafe_allow_html=True)
     else:
@@ -283,7 +283,11 @@ def annotate_figures_auto(args):
         solution = args.solution if args.solution else ""
     except Exception as e:
         solution = ''
-    text_contain_fig = args.problem + " " + option_content + " " + solution
+    try:
+        context = args.context if args.context else ""
+    except Exception as e:
+        context = ""
+    text_contain_fig = context + " " + args.problem + " " + option_content + " " + solution + " "
     url_dict = find_figure_urls(text_contain_fig)
     if url_dict:
         st.write("**检测出本题有图片**")
