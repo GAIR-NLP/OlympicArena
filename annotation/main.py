@@ -34,10 +34,11 @@ answer_type_options = {
 def init_page():
     st.set_page_config(layout="wide")
     col1, col2 = st.columns([10, 3.5])
-    return col1, col2
+    col3, col4 = st.columns([10, 3.5])
+    return col1, col2, col3, col4
 
-def show_document(args, column, d):
-    with column:
+def show_document(args, column_up, column_down, d):
+    with column_up:
         col1, col2, col3 = st.columns(3)
         with col1:
             subjects = list(d.keys())
@@ -66,10 +67,13 @@ def show_document(args, column, d):
         if 'display_pdf' not in st.session_state:
             st.session_state['display_pdf'] = True
         display_pdf_option = st.checkbox('开启PDF预览', value=st.session_state['display_pdf'])
-            
+        
+        # st.header(selected_file+'.pdf')
+        
+    with column_down:
         if selected_file:
             if not os.path.exists(os.path.join(folder_path, f"{selected_file}.md")):
-                st.header(selected_file+'.pdf')
+                # st.header(selected_file+'.pdf')
                 pdf_file_path = os.path.join(folder_path, f"{selected_file}.pdf")
                 base64_pdf_content = get_pdf_display_content(pdf_file_path)
                 display_pdf(base64_pdf_content)
@@ -77,14 +81,14 @@ def show_document(args, column, d):
                 if display_pdf_option:
                     col_left, col_right = st.columns([3, 2])
                     with col_left:
-                        st.header(selected_file+'.pdf')
+                        # st.header(selected_file+'.pdf')
                         pdf_file_path = os.path.join(folder_path, f"{selected_file}.pdf")
                         base64_pdf_content = get_pdf_display_content(pdf_file_path)
                         display_pdf(base64_pdf_content)
                     with col_right:
                         md_file_path = os.path.join(folder_path, f"{selected_file}.md")
                         if os.path.exists(md_file_path):
-                            st.header(selected_file+'.md')
+                            # st.header(selected_file+'.md')
                             with open(md_file_path, "r", encoding='utf-8') as file:
                                 markdown_content = file.read()
                                 st.text_area('hide', markdown_content, height=800, label_visibility="collapsed", key="md1")
@@ -93,7 +97,7 @@ def show_document(args, column, d):
                 else: # no pdf
                     md_file_path = os.path.join(folder_path, f"{selected_file}.md")
                     if os.path.exists(md_file_path):
-                        st.header(selected_file+'.md')
+                        # st.header(selected_file+'.md')
                         with open(md_file_path, "r", encoding='utf-8') as file:
                             markdown_content = file.read()
                             st.text_area('hide', markdown_content, height=800, label_visibility="collapsed", key="md2")
@@ -105,7 +109,7 @@ def show_document(args, column, d):
         
         if selected_file_enhanced != '不启用':
             if not os.path.exists(os.path.join(folder_path, f"{selected_file_enhanced}.md")):
-                st.header(selected_file_enhanced + '.pdf')
+                # st.header(selected_file_enhanced + '.pdf')
                 pdf_file_path = os.path.join(folder_path, f"{selected_file_enhanced}.pdf")
                 if os.path.exists(pdf_file_path):
                     base64_pdf_content = get_pdf_display_content(pdf_file_path)
@@ -114,13 +118,13 @@ def show_document(args, column, d):
                 if display_pdf_option:
                     enhanced_col_left, enhanced_col_right = st.columns([3, 2])  # Create new variables for clarity
                     with enhanced_col_left:
-                        st.header(selected_file_enhanced + '.pdf')
+                        # st.header(selected_file_enhanced + '.pdf')
                         pdf_file_path = os.path.join(folder_path, f"{selected_file_enhanced}.pdf")
                         if os.path.exists(pdf_file_path):
                             base64_pdf_content = get_pdf_display_content(pdf_file_path)
                             display_pdf(base64_pdf_content)
                     with enhanced_col_right:
-                        st.header(selected_file_enhanced + '.md')
+                        # st.header(selected_file_enhanced + '.md')
                         md_file_path = os.path.join(folder_path, f"{selected_file_enhanced}.md")
                         if os.path.exists(md_file_path):
                             with open(md_file_path, "r", encoding='utf-8') as file:
@@ -129,7 +133,7 @@ def show_document(args, column, d):
                         else:
                             st.header('No markdown file provided!')
                 else:
-                    st.header(selected_file_enhanced + '.md')
+                    # st.header(selected_file_enhanced + '.md')
                     md_file_path = os.path.join(folder_path, f"{selected_file_enhanced}.md")
                     if os.path.exists(md_file_path):
                         with open(md_file_path, "r", encoding='utf-8') as file:
@@ -154,8 +158,8 @@ def load(args):
     else:
         st.session_state.question_number = 0
 
-def show_annotate(args, column):
-    with column.container(height=1000):
+def show_annotate(args, column_up, column_down):
+    with column_up:
         a, b = st.columns(2)
         with a:
             st.subheader('标注信息')
@@ -169,7 +173,8 @@ def show_annotate(args, column):
         with col_file_name:
             st.text_input('文件名称', value=args.file_name, disabled=True)
         
-        annotate(args, column)
+    with column_down.container(height=900):
+        annotate(args, column_down)
 
 
 def annotate_problem_context(args):
@@ -552,8 +557,8 @@ if __name__ == "__main__":
     if not os.path.exists(args.output_dir):
         os.makedirs(args.output_dir)
     
-    col1, col2 = init_page()
-    show_document(args, col1, subject_competition_dict) # choose subject and competition
+    col1, col2, col3, col4 = init_page()
+    show_document(args, col1, col3, subject_competition_dict) # choose subject and competition
     # args.output_folder = os.path.join(args.output_dir, args.subject, args.competition, args.file_name)
     # load(args) # get current question_number
     
@@ -562,5 +567,5 @@ if __name__ == "__main__":
     # if args.annotated_list:
     #     show_sidebar(args)
     
-    show_annotate(args, col2)
+    show_annotate(args, col2, col4)
     # annotate(args, col2)
