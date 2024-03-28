@@ -41,7 +41,7 @@ def annotate_type_single_choice(args): # 单选题
         for i, option in enumerate(st.session_state.options_list):
             col1, col2 = st.columns([10, 3])
             edited_option = col1.text_input(f'选项 {chr(65 + i)}', value=st.session_state[f'option_{i}'], key=f"edited_option_{i}_{st.session_state.get('input_reset_counter', 0)}")
-            col1.markdown("**预览:** "+st.session_state[f'option_{i}'], unsafe_allow_html=True)
+            col1.markdown("**预览:** "+normalize_display_figure(st.session_state[f'option_{i}']), unsafe_allow_html=True)
             if edited_option != option:
                 st.session_state.options_list[i] = edited_option
                 st.session_state[f'option_{i}'] = edited_option
@@ -104,7 +104,7 @@ def annotate_type_multi_choice(args): # 多选题
         for i, option in enumerate(st.session_state.options_list):
             col1, col2 = st.columns([10, 3])
             edited_option = col1.text_input(f'选项 {chr(65 + i)}', value=st.session_state[f'option_{i}'], key=f"edited_option_mul_{i}_{st.session_state.get('input_reset_counter', 0)}")
-            col1.markdown("**预览:** "+st.session_state[f'option_{i}'], unsafe_allow_html=True)
+            col1.markdown("**预览:** "+normalize_display_figure(st.session_state[f'option_{i}']), unsafe_allow_html=True)
             if edited_option != option:
                 st.session_state.options_list[i] = edited_option
                 st.session_state[f'option_{i}'] = edited_option
