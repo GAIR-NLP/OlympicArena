@@ -113,11 +113,21 @@ def delete_file(output_folder, file_timestamp):
         os.remove(file_path)
         
         
-def find_figure_urls(text):
+def find_figure_urls(text): # pure urls
     url_pattern = r'https://cdn.mathpix.com/cropped/[^\s\)]+?\.jpg[^\s\)]*|https://i.postimg.cc/[^\s\)]+?/image\.png'
     urls = re.findall(url_pattern, text)
     url_dict = {f'figure{i+1}': url for i, url in enumerate(urls)}
     return url_dict
+
+
+def normalize_display_figure(text):
+    md_url_pattern = r"!\[.*?\]\((https://cdn.mathpix.com/cropped/[^\s\)]+?\.jpg[^\s\)]*|https://i.postimg.cc/[^\s\)]+?/image\.png)\)"
+    def replace_with_img_tag(match):
+        img_url = match.group(1)
+        return f'<img src="{img_url}" width="200" style="height: auto;">'
+    normalized_text = re.sub(md_url_pattern, replace_with_img_tag, text)
+    return normalized_text
+    
 
 def replace_url_with_not(text, lst):
     url_2_index = {}
