@@ -47,8 +47,16 @@ def get_pdf_display_content(file_path):
     return base64_pdf
 
 def display_pdf(base64_pdf):
+    # pdf_display = f"""
+    # <div style="position: relative; width: 100%; height: 0; padding-bottom: 100%;">
+    #     <iframe src="data:application/pdf;base64,{base64_pdf}" 
+    #             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+    #             type="application/pdf">
+    #     </iframe>
+    # </div>
+    # """
     pdf_display = f"""
-    <div style="position: relative; width: 100%; height: 0; padding-bottom: 100%;">
+    <div style="position: relative; width: 100%; height: 800px;">
         <iframe src="data:application/pdf;base64,{base64_pdf}" 
                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
                 type="application/pdf">
@@ -140,7 +148,8 @@ def replace_url_with_not(text, lst):
 def identify_choices(text):
     patterns = [
         r"([A-Za-z])[\.\s]+\s*(.+?)(?=(\n[A-Za-z][\.\s]+\s|$\n?))",
-        r"(\d+)[\.\s]+\s*(.+?)(?=(\n\d+[\.\s]+\s|$\n?))"
+
+        r"(\d+)[\.\s]+\s*(.+?)(?=(\n\d+[\.\s]+\s|$\n?))",
     ]
     for pattern in patterns:
         lst = []
@@ -157,15 +166,15 @@ def identify_choices(text):
     
     
 if __name__ == "__main__":
-    # print(find_figure_urls("https://cdn.mathpix.com/cropped/2024_03_14_b9e515217a571029676eg-09.jpg?height=1168&width=726&top_left_y=1432&top_left_x=151)"))
+    print(find_figure_urls("The citric acid cycle is central to metabolism, for the supply energy and various key compounds. In citric acid cycle, the enzyme aconitase catalyzes the reversible conversion between citrate and isocitrate. In this reaction, $\\mathrm{OH}$ group at $\\mathrm{C} 3$ and $\\mathrm{H}$ group at $\\mathrm{C} 4$ of citrate are removed as water, thereafter a water molecule is added back in a reverse manner to generate isocitrate (Figure 1). However, OH group is never added at C2.\n\n![](https://cdn.mathpix.com/cropped/2024_03_14_285df5ea8616a0714b70g-05.jpg?height=660&width=1422&top_left_y=795&top_left_x=223)\n\nFigure 1"))
     
-    text = """1. The surface salinity at low latitudes can 
+#     text = """1. The surface salinity at low latitudes can 
 
-be explained by high evaporation rates
+# be explained by high evaporation rates
 
-2. The surface salinity at mid latitudes can be explained by high precipitation rates
+# 2. The surface salinity at mid latitudes can be explained by high precipitation rates
 
-3. For mid latitudes, the Eastern region receives more abundant rainfall than the Western region
+# 3. For mid latitudes, the Eastern region receives more abundant rainfall than the Western region
 
-4. For mid latitudes, the Western region receives more abundant rainfall than the Eastern region"""
-    print(identify_choices(text))
+# 4. For mid latitudes, the Western region receives more abundant rainfall than the Eastern region"""
+#     print(identify_choices(text))
