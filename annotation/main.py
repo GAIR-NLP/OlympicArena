@@ -55,7 +55,11 @@ def show_document(args, column_up, column_down, d):
             args.file_name = selected_file
         
         # 决定了最终存储的位置
+        # 某一张试卷的
         args.output_folder = os.path.join(args.output_dir, args.subject, args.competition, args.file_name)
+        # 当前比赛的
+        args.output_folder_com = os.path.join(args.output_dir, args.subject, args.competition)
+        
         load(args) # get current question_number
     
         # modify
@@ -145,6 +149,7 @@ def show_document(args, column_up, column_down, d):
                         
         
 def load(args):
+    # 当前试卷的标注题数
     if 'question_number' not in st.session_state:
         st.session_state.question_number = 0
     
@@ -157,14 +162,32 @@ def load(args):
             st.session_state.question_number = 0
     else:
         st.session_state.question_number = 0
+    
+    # 当前竞赛的总标注题量
+    if "question_number_com" not in st.session_state:
+        st.session_state.question_number_com = 0
+
+    question_number_com = 0
+    if os.path.exists(args.output_folder_com):
+        for root, dirs, files in os.walk(args.output_folder_com):
+            for file in files:
+                if file.endswith(".json"):
+                    question_number_com += 1
+        st.session_state.question_number_com = question_number_com
+    else:
+        st.session_state.question_number_com = 0
+        
+        
 
 def show_annotate(args, column_up, column_down):
     with column_up:
-        a, b = st.columns(2)
-        with a:
-            st.subheader('标注信息')
+        b, c = st.columns(2)
+        # with a:
+        #     st.subheader('标注信息')
         with b:
-            st.subheader('num: ' + str(st.session_state.question_number))
+            st.subheader('当前文件已标: ' + str(st.session_state.question_number))
+        with c:
+            st.subheader('当前竞赛已标: ' + str(st.session_state.question_number_com))
         col_subject, col_competition, col_file_name = st.columns(3)
         with col_subject:
             st.text_input('学科', value=args.subject, disabled=True)
@@ -173,7 +196,7 @@ def show_annotate(args, column_up, column_down):
         with col_file_name:
             st.text_input('文件名称', value=args.file_name, disabled=True)
         
-    with column_down.container(height=900):
+    with column_down.container(height=800):
         annotate(args, column_down)
 
 
