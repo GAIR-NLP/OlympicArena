@@ -61,7 +61,7 @@ def annotate_type_single_choice(args): # 单选题
         answer_label = st.selectbox('答案 [answer*]', options=option_labels, index=p_index, key=f"answer_label_{st.session_state.get('input_reset_counter', 0)}") # 字母
         answer = st.session_state.options_list[ord(answer_label) - 65] # 索引，从0开始
         args.answer_label = answer_label
-        st.write(f"选中的答案内容: {answer}")
+        st.write(f"选中的答案内容: {normalize_display_figure(answer)}", unsafe_allow_html=True)
         # annotate_figures_auto(args)
         # st.markdown(f"选中的答案内容: {replace_url_with_not(answer, st.session_state.figure_urls) if args.figure_exists else answer}", unsafe_allow_html=True)
     else:
@@ -125,7 +125,8 @@ def annotate_type_multi_choice(args): # 多选题
         selected_answers = [st.session_state.options_list[ord(label) - 65] for label in selected_answer_labels]  # Get selected answers based on labels
         args.answer_label = selected_answer_labels # 字符串列表
         if selected_answers:
-            st.write(f"选中的答案内容: {' || '.join(selected_answers)}")
+            temp_str = normalize_display_figure('\n\n'.join(selected_answers))
+            st.write(f"选中的答案内容: \n\n {temp_str}", unsafe_allow_html=True)
             # annotate_figures_auto(args)
             # temp_str = ', '.join(selected_answers)
             # st.markdown(f"选中的答案内容: {replace_url_with_not(temp_str, st.session_state.figure_urls) if args.figure_exists else temp_str}", unsafe_allow_html=True)
