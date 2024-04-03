@@ -12,7 +12,7 @@ pip install streamlit
 
 在开始之前，请在当前工作目录中创建一个名为 `data` 的文件夹，并按以下结构组织您的文件：
 
-具体data文件在https://www.jianguoyun.com/p/DZ_mQpgQrsnADBim5ckFIAA (访问密码 : 112233)
+具体data文件在google drive中
 
 ```
 data
