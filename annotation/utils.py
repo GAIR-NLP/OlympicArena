@@ -148,8 +148,9 @@ def replace_url_with_not(text, lst):
 def identify_choices(text):
     patterns = [
         r"([A-Za-z])[\.\s]+\s*(.+?)(?=(\n[A-Za-z][\.\s]+\s|$\n?))",
-
         r"(\d+)[\.\s]+\s*(.+?)(?=(\n\d+[\.\s]+\s|$\n?))",
+        r"([A-Za-z])\)\s*(.+?)(?=(\n[A-Za-z]\)\s*|$\n?))",
+        r"\(([A-Za-z])\)\s*(.+?)(?=(\n\([A-Za-z]\)\s*|$\n?))"
     ]
     for pattern in patterns:
         lst = []
