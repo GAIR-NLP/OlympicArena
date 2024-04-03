@@ -205,12 +205,12 @@ def annotate_problem_context(args):
         p_index = 1 if hasattr(args, 'context') and args.context else 0
     else:
         p_index = 0
-    need_context = st.radio('是否需要添加上下文', ('否', '是'), key=f"need_context_{st.session_state.get('input_reset_counter', 0)}", index=p_index)
+    need_context = st.radio('是否需要添加前置信息(是否需要补充**先前题干**的信息)', ('否', '是'), key=f"need_context_{st.session_state.get('input_reset_counter', 0)}", index=p_index)
     args.need_context = need_context
     if need_context == '是':
-        context = st.text_area('上下文', value=args.context if st.session_state.get('modify_mode', False) else '', key=f"context_{st.session_state.get('input_reset_counter', 0)}")
+        context = st.text_area('前置依赖信息', value=args.context if st.session_state.get('modify_mode', False) else '', key=f"context_{st.session_state.get('input_reset_counter', 0)}")
         args.context = context
-        st.markdown('上下文预览:')
+        st.markdown('前置信息预览:')
         st.markdown(normalize_display_figure(context), unsafe_allow_html=True)
     else:
         args.context = None
@@ -320,15 +320,15 @@ def annotate_figures_auto(args):
     if url_dict:
         st.write("**检测出本题有图片**")
         args.figure_exists = "是"
-        if st.session_state.get('modify_mode', False):
-            if args.figure_dependent or args.figure_dependent == None:
-                p_index = 0
-            else:
-                p_index = 1
-        else:
-            p_index = 0
-        figure_dependent = st.radio('该题目是否依赖图片', ('依赖', '不依赖'), key=f"figure_dependent_{st.session_state.get('input_reset_counter', 0)}", index=p_index)
-        args.figure_dependent = figure_dependent
+        # if st.session_state.get('modify_mode', False):
+        #     if args.figure_dependent or args.figure_dependent == None:
+        #         p_index = 0
+        #     else:
+        #         p_index = 1
+        # else:
+        #     p_index = 0
+        # figure_dependent = st.radio('该题目是否依赖图片', ('依赖', '不依赖'), key=f"figure_dependent_{st.session_state.get('input_reset_counter', 0)}", index=p_index)
+        # args.figure_dependent = figure_dependent
         figure_type_options = {
             '1': '几何图形（数学相关，平面、几何等）',
             '2': '任何图表（表格、柱状图、折线图等表示统计数据信息的）',
@@ -360,7 +360,8 @@ def annotate_figures_auto(args):
             st.session_state.figure_urls = [{'url': url, 'type': None} for url in url_dict.values()]
         
         for i, entry in enumerate(st.session_state.figure_urls):
-            col1, col2, col3 = st.columns([3, 6, 3])  # 分配空间
+            # col1, col2, col3 = st.columns([3, 6, 3])  # 分配空间
+            col1, col2 = st.columns([5, 5])  # 分配空间
             url = entry['url']
             try:
                 col1.image(url, caption=f'figure{i+1}', use_column_width=True)  # 显示图片
@@ -369,7 +370,7 @@ def annotate_figures_auto(args):
             p_index = list(figure_type_options.keys()).index(entry['type']) if st.session_state.get('modify_mode', False) and entry['type'] else 0
             selected_type = col2.selectbox(f"figure{i+1} 的类型", options=list(figure_type_options.keys()), format_func=lambda x: f"{x}: {figure_type_options[x]}", index=p_index, key=f'figure_type_{i}')
             st.session_state.figure_urls[i]['type'] = selected_type  # 更新图片类型
-            col3.write(f'URL: {url[:50]}...')  # 显示URL
+            # col3.write(f'URL: {url[:50]}...')  # 显示URL
     else:
         st.write("**未检测出图片**")
         args.figure_exists = "否"
@@ -403,9 +404,9 @@ def save_annotation(args):
         'type_sequence': args.type if args.answer_type in ['MPV', 'MA'] else None,
         'solution': args.solution if args.have_solution == '是' and args.solution != '' else None,
         'figure_exists': True if args.figure_exists == "是" else False, # 必填
-        'figure_dependent': None if args.figure_exists != "是" else (args.figure_dependent == "依赖"),
+        # 'figure_dependent': None if args.figure_exists != "是" else (args.figure_dependent == "依赖"),
         'figure_urls': id_url if args.figure_exists == "是" else None,
-        'scenario': args.scenario if args.answer_type == 'OT' else None,
+        # 'scenario': args.scenario if args.answer_type == 'OT' else None,
         
         'subject': args.subject,
         'competition': args.competition,
