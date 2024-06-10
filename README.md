@@ -85,7 +85,7 @@ all_val_data = load_data("GAIR/OlympicArena", "val")
 print(all_val_data[0])
 ```
 
-If you only want to use a specific subset of our dataset (e.g., only English questions, or only text-only questions), you just need to modify the load_data code snippet.
+If you only want to use a specific subset of our dataset (e.g., only English problems, or only text-only problems), you just need to modify the load_data code snippet.
 
 ### Inference
 
