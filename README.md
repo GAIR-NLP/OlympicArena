@@ -1,5 +1,7 @@
 # OlympicArena: Benchmarking Multi-discipline Cognitive Reasoning for Superintelligent AI
 
+<p align="center"> <img src="images/overview.png" style="width: 85%;" id="title-icon">       </p>
+
 <p align="center">
   🤗 <a href="https://huggingface.co/datasets/GAIR/OlympicArena" target="_blank">Hugging Face</a>
 </p>
