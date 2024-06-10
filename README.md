@@ -37,7 +37,7 @@ If you need to define your own model for inference or evaluation, you will also 
 
 ### Load Data
 
-We have published the data for seven disciplines on [Hugging Face](https://huggingface.co/datasets/GAIR/OlympicArena). Each discipline is divided into val and test splits. The val split includes the answers for small-scale testing, while the answers for the test split are not publicly available. You can submit your results to our platform for evaluation (refer to [Submit your result](#submit-your-result)).
+We have released the data for seven disciplines on [Hugging Face](https://huggingface.co/datasets/GAIR/OlympicArena). Each discipline is divided into val and test splits. The val split includes the answers for small-scale testing, while the answers for the test split are not publicly available. You can submit your results to our platform for evaluation (refer to [Submit your result](#submit-your-result)).
 
 Loading the data is very simple. You can use the following code snippet:
 
