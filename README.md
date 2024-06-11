@@ -15,7 +15,6 @@
   - [Inference](#inference)
   - [Evaluation](#evaluation)
   - [Submit your result](#submit-your-result)
-- [Leaderboard](#leaderboard)
 - [Citation](#citation)
 
 
@@ -67,34 +66,78 @@ Each data entry contains the following fields:
 - `modality`: The modality type of the problem statement, where `text-only` indicates the problem statement does not contain images, and `multi-modal` indicates the problem statement contains images
 
 
-
-If you need to load all the val data (the same applies to the test set), you can use the following code: (located in code/utils.py)
+If you only want to use a specific subset of our dataset (e.g., only English problems, or only text-only problems), you just need to modify the load_data code snippet ([./code/utils.py](./code/utils.py)):
 
 ```python
-from datasets import load_dataset, concatenate_datasets
-
-def load_data(hf_data_path, split):
+def load_data(hf_data_path, split, language=None, modality=None):
     subjects = ["Math", "Physics", "Chemistry", "Biology", "Geography", "Astronomy", "CS"]
     datasets = []
     for subject in subjects:
         dataset = load_dataset(hf_data_path, subject, split=split)
+        if language:
+            dataset = dataset.filter(lambda x: x['language'] == language)
+        if modality:
+            dataset = dataset.filter(lambda x: x['modality'] == modality)
+        
         datasets.append(dataset)
     return concatenate_datasets(datasets)
-
-all_val_data = load_data("GAIR/OlympicArena", "val")
-print(all_val_data[0])
 ```
-
-If you only want to use a specific subset of our dataset (e.g., only English problems, or only text-only problems), you just need to modify the load_data code snippet.
 
 ### Inference
 
+To run inference, first navigate to the code directory:
+```bash
+cd code
+```
+
+Then, execute the following command to run the inference script:
+
+```bash
+python inference.py \
+    --hf_data_path GAIR/OlympicArena \
+    --model_output_dir ./model_output/ \
+    --split val \
+    --model gpt-4o \
+    --batch 15 \
+    --api_key YOUR_API_KEY \
+    --base_url YOUR_BASE_URL \
+    --save_error
+```
+
+- `--hf_data_path`: Path to the Hugging Face dataset (default: "GAIR/OlympicArena")
+- `--model_output_dir`: Directory to save the model output (default: "./model_output/")
+- `--split`: Dataset split to use for inference, either "val" or "test"
+- `--model`: Model name to use for inference
+- `--batch`: Batch size for inference
+- `--api_key`: Your API key, if required
+- `--base_url`: Base URL for the API, if required
+- `--save_error`: Save errors as None (default: False). If set, any problem that fails or encounters an error during inference will be saved with an answer of `None`.
+
+After inference is complete, a JSON file containing the inference outputs will be generated in `model_output_dir/model`, which can be used for evaluation.
+
+If you want to use your own model for inference, you can enter the `model` folder and define your model as a subclass of `BaseModel`.
+
+
 ### Evaluation
+
+You can only run evaluation locally on the val set (because the answers for the test set are not publicly available). First, ensure that the corresponding JSON file representing the inference outputs is generated in the inference step.
+
+Then you can execute the following script from the command line:
+
+```bash
+python evaluation.py \
+     --hf_data_path GAIR/OlympicArena \
+     --model_output_dir ./model_output/ \
+     --result_dir ./result/ \
+     --split val \
+     --model gpt-4o
+```
+
+Finally, we will print the overall accuracy, accuracy for different subjects, accuracy for different languages, and accuracy for different modalities.
 
 ### Submit your result
 
-
-### Leaderboard
+We are working hard to build a platform that allows you to submit your results for automated evaluation.
 
 ## Citation
 
