@@ -29,6 +29,7 @@
 To begin using the OlympicArena benchmark, you need to install the required dependencies. You can do this by running the following command:
 
 ```bash
+git clone https://github.com/GAIR-NLP/OlympicArena.git
 pip install -r requirements.txt
 ```
 
