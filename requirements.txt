@@ -5,4 +5,4 @@ openai
 streamlit==1.32.1
 sympy==1.12
 tqdm
-pip install antlr4-python3-runtime==4.11
+antlr4-python3-runtime==4.11
