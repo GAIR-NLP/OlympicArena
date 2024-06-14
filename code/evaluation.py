@@ -52,7 +52,7 @@ def evaluate(args, datasets, output_json, K=1):
         write_json({"id": problem_id, 
                     "answer_type": example["answer_type"], 
                     "answer": example.get("answer", None), 
-                    "model_answer": output_json[problem_id]["model_answer"], 
+                    "model_answer": output_json[problem_id]["model_answer"] if problem_id in output_json else None, 
                     "result": result, 
                     "subject": example["subject"], 
                     "language": example["language"], 
