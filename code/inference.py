@@ -81,7 +81,7 @@ def generate_output_json(args):
                 if problem_id.endswith(".json"):
                     file_path = os.path.join(subject_dir, problem_id)
                     d = read_json(file_path)
-                    output_dict[d["id"]] = {"model_answer": d.get("model_answer", None)}
+                    output_dict[d["id"]] = d.get("model_answer", None)
 
                 
     write_json(output_dict, output_json_path)

@@ -21,8 +21,8 @@ def evaluate(args, datasets, output_json, K=1):
             answer = example["answer"]
             if len(answer) == 1:
                 answer = answer[0]
-            if problem_id in output_json and output_json[problem_id]["model_answer"] is not None:
-                flag = judger.auto_judge(output_json[problem_id]["model_answer"], answer, type_sequence)
+            if problem_id in output_json and output_json[problem_id] is not None:
+                flag = judger.auto_judge(output_json[problem_id], answer, type_sequence)
             else:
                 flag = False
                 
@@ -31,11 +31,11 @@ def evaluate(args, datasets, output_json, K=1):
         else:
             problem_id = example["id"]
             
-            if problem_id not in output_json or output_json[problem_id]["model_answer"] is None:
+            if problem_id not in output_json or output_json[problem_id] is None:
                 result = 0
             else:
                 test_cases = example["test_cases"]
-                code_snippets = output_json[problem_id]["model_answer"]
+                code_snippets = output_json[problem_id]
                 code_snippets = [snippet for snippet in code_snippets if snippet is not None]
                 if code_snippets:
                     code_results = code_executor(code_snippets, test_cases)
@@ -52,7 +52,7 @@ def evaluate(args, datasets, output_json, K=1):
         write_json({"id": problem_id, 
                     "answer_type": example["answer_type"], 
                     "answer": example.get("answer", None), 
-                    "model_answer": output_json[problem_id]["model_answer"] if problem_id in output_json else None, 
+                    "model_answer": output_json[problem_id] if problem_id in output_json else None, 
                     "result": result, 
                     "subject": example["subject"], 
                     "language": example["language"], 
@@ -134,7 +134,7 @@ def print_statistics(total_rate, subject_rate, language_rate, modality_rate):
         
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--hf_data_path', type = str, default="./data/")
+    parser.add_argument('--hf_data_path', type = str, default="GAIR/OlympicArena")
     parser.add_argument('--model_output_dir', type=str, default="./model_output/")
     parser.add_argument('--result_dir', type=str, default="./result/")
     parser.add_argument("--split", type=str, default="val", help="only answers of the validation set are released")
