@@ -38,8 +38,8 @@ def evaluate(args, datasets, output_json, K=1):
                 code_snippets = output_json[problem_id]["model_answer"]
                 code_snippets = [snippet for snippet in code_snippets if snippet is not None]
                 if code_snippets:
-                    results = code_executor(code_snippets, test_cases)
-                    num_correct = sum(result == "Passed" for result in results) 
+                    code_results = code_executor(code_snippets, test_cases)
+                    num_correct = sum(code_result == "Passed" for code_result in code_results) 
                     num_samples = len(code_snippets)
                     pass_at_k = estimate_pass_at_k([num_samples], [num_correct], K)[0]
                     
