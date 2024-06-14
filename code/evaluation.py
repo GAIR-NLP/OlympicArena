@@ -36,13 +36,16 @@ def evaluate(args, datasets, output_json, K=1):
             else:
                 test_cases = example["test_cases"]
                 code_snippets = output_json[problem_id]["model_answer"]
-                
-                results = code_executor(code_snippets, test_cases)
-                num_correct = sum(result == "Passed" for result in results) 
-                num_samples = len(code_snippets)
-                pass_at_k = estimate_pass_at_k([num_samples], [num_correct], K)[0]
-                
-                result = pass_at_k
+                code_snippets = [snippet for snippet in code_snippets if snippet is not None]
+                if code_snippets:
+                    results = code_executor(code_snippets, test_cases)
+                    num_correct = sum(result == "Passed" for result in results) 
+                    num_samples = len(code_snippets)
+                    pass_at_k = estimate_pass_at_k([num_samples], [num_correct], K)[0]
+                    
+                    result = pass_at_k
+                else:
+                    result = 0
                 
             
         os.makedirs(os.path.dirname(result_path), exist_ok=True)
@@ -131,7 +134,7 @@ def print_statistics(total_rate, subject_rate, language_rate, modality_rate):
         
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--hf_data_path', type = str, default="GAIR/OlympicArena")
+    parser.add_argument('--hf_data_path', type = str, default="./data/")
     parser.add_argument('--model_output_dir', type=str, default="./model_output/")
     parser.add_argument('--result_dir', type=str, default="./result/")
     parser.add_argument("--split", type=str, default="val", help="only answers of the validation set are released")
