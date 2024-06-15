@@ -5,7 +5,8 @@
 <p align="center">
   📄 <a href="https://github.com/GAIR-NLP/OlympicArena" target="_blank">Paper</a> &nbsp; | &nbsp;
   🤗 <a href="https://huggingface.co/datasets/GAIR/OlympicArena" target="_blank">Hugging Face</a> &nbsp; | &nbsp;
-  🌐 <a href="https://gair-nlp.github.io/OlympicArena/" target="_blank">Website</a>
+  🌐 <a href="https://gair-nlp.github.io/OlympicArena/" target="_blank">Website</a> &nbsp; | &nbsp;
+  📤 <a href="#submit-your-result" target="_self">Submit</a>
 </p>
 
 ## Contents
@@ -22,7 +23,7 @@
 
 ## Introduction
 
-<p align="center"> <img src="images/overview.png" style="width: 75%;" id="title-icon">       </p>
+<p align="center"> <img src="images/overview.png" style="width: 80%;" id="title-icon">       </p>
 
 **OlympicArena** is a comprehensive, highly-challenging, and rigorously curated benchmark featuring a detailed, fine-grained evaluation mechanism designed to assess advanced AI capabilities across a broad spectrum of Olympic-level challenges. We aim to advance AI towards superintelligence, equipping it to address more complex challenges in science and beyond.
 
@@ -149,3 +150,4 @@ If you want to test your own model's performance on the test set, you can submit
 If you encounter any problem about our work, please do not hesitate to submit an issue or directly contact us via email [gair.olympicarena@gmail.com](mailto:gair.olympicarena@gmail.com).
 
 If you do find our code helpful or use our benchmark dataset, please citing our paper.
+
