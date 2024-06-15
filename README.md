@@ -1,9 +1,11 @@
 # OlympicArena: Benchmarking Multi-discipline Cognitive Reasoning for Superintelligent AI
 
-<p align="center"> <img src="images/overview.png" style="width: 85%;" id="title-icon">       </p>
+<p align="center"> <img src="images/logo.jpg" style="width: 85%;" id="title-icon">       </p>
 
 <p align="center">
-  🤗 <a href="https://huggingface.co/datasets/GAIR/OlympicArena" target="_blank">Hugging Face</a>
+  📄 <a href="https://github.com/GAIR-NLP/OlympicArena" target="_blank">Paper</a> &nbsp; | &nbsp;
+  🤗 <a href="https://huggingface.co/datasets/GAIR/OlympicArena" target="_blank">Hugging Face</a> &nbsp; | &nbsp;
+  🌐 <a href="https://gair-nlp.github.io/OlympicArena/" target="_blank">Website</a>
 </p>
 
 ## Contents
