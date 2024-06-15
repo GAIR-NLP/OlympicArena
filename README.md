@@ -142,7 +142,10 @@ Finally, we will print the overall accuracy, accuracy for different subjects, ac
 
 ### Submit your result
 
-
+If you want to test your own model's performance on the test set, you can submit your JSON file to our [submission platform](https://huggingface.co/spaces/GAIR/OlympicArenaSubmission). Detailed format instructions are available on the submission platform. We strongly recommend using the code framework provided in this repository for inference, as it will generate the required JSON file that can be directly submitted to the platform.
 
 ## Citation
 
+If you encounter any problem about our work, please do not hesitate to submit an issue or directly contact us via email [gair.olympicarena@gmail.com](mailto:gair.olympicarena@gmail.com).
+
+If you do find our code helpful or use our benchmark dataset, please citing our paper.
