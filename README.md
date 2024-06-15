@@ -147,7 +147,7 @@ If you want to test your own model's performance on the test set, you can submit
 
 ## Citation
 
-If you encounter any problem about our work, please do not hesitate to submit an issue or directly contact us via email [gair.olympicarena@gmail.com](mailto:gair.olympicarena@gmail.com).
+If you encounter any question about our work, please do not hesitate to submit an issue or directly contact us via email [gair.olympicarena@gmail.com](mailto:gair.olympicarena@gmail.com).
 
 If you do find our code helpful or use our benchmark dataset, please citing our paper.
 
