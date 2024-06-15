@@ -142,7 +142,7 @@ Finally, we will print the overall accuracy, accuracy for different subjects, ac
 
 ### Submit your result
 
-We are working hard to build a platform that allows you to submit your results for automated evaluation.
+
 
 ## Citation
 
