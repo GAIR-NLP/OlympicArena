@@ -98,7 +98,7 @@ https://cdn.mathpix.com/cropped/2024_03_14_b9e515217a571029676eg-10.jpg?height=4
 
 - Multiple Values per problem
 
-  Follow the system's rules to add information for each value one by one (**After filling in a set of name, type, answer, and unit, click "Add Value", which adds an entry**).
+  Follow the system's rules to add information for each value one by one (**After filling in a set of name, type, answer, and unit, click "Add New Value", which adds an entry**).
   
   For the name field, fill in the description of the value to be found (later used in the prompt to guide the model's output).
 
@@ -114,18 +114,18 @@ https://cdn.mathpix.com/cropped/2024_03_14_b9e515217a571029676eg-10.jpg?height=4
 ### 4. Save
 All annotated outputs are stored as ./subject/competition_abbreviation/file_name/date_marker.json in the ./output/ folder.
 There are three save-related buttons in the annotation interface:
-- Save This Question: Temporarily save this question. You can click save again after modifying the annotation information.
-- Save & Next Question: Save this question and start annotating the next question. The annotation information of the previous question will be cleared from the page.
-- Save & Next Question (Do Not Clear): Save this question and start annotating the next question. The annotation information of the previous question will remain on the page (this design is to facilitate the annotation of a large question with multiple sub-questions, where some images and question stems may be used for several sub-questions).
+- Save this problem: Temporarily save this problem. You can click save again after modifying the annotation information.
+- Save & Next problem: Save this problem and start annotating the next problem. The annotation information of the previous problem will be cleared from the page.
+- Save & Next problem (without clearing): Save this problem and start annotating the next problem. The annotation information of the previous problem will remain on the page (this design is to facilitate the annotation of a large problem with multiple sub-problems, where some images and problem stems may be used for several sub-problems).
 
 ### 5. Edit Mode
-If you have already annotated some content in the current document and want to modify certain previously annotated questions, you can expand the left sidebar.
-The sidebar will display all the questions you have annotated in the current document (each question is displayed with the external save file name + question content).
+If you have already annotated some content in the current document and want to modify certain previously annotated problems, you can expand the left sidebar.
+The sidebar will display all the problems you have annotated in the current document (each problem is displayed with the external save file name + problem content).
 
-Click on the question you want to modify, and the system will enter "Edit Mode" and load the annotation content of the selected question in the annotation panel on the right, allowing you to make modifications.
+Click on the problem you want to modify, and the system will enter "Edit Mode" and load the annotation content of the selected problem in the annotation panel on the right, allowing you to make modifications.
 
-After finishing the modifications, click save to update the annotation for that question.
+After finishing the modifications, click save to update the annotation for that problem.
 
-Click "Exit Edit Mode" to continue normal annotation.
+Click "Exit Modify Mode" to continue normal annotation.
 
-Click "Delete This Question" to delete the external storage file for that question.
+Click "Delete This problem" to delete the external storage file for that problem.
