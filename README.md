@@ -6,7 +6,7 @@
   📄 <a href="https://github.com/GAIR-NLP/OlympicArena" target="_blank">Paper</a> &nbsp; | &nbsp;
   🤗 <a href="https://huggingface.co/datasets/GAIR/OlympicArena" target="_blank">Hugging Face</a> &nbsp; | &nbsp;
   🌐 <a href="https://gair-nlp.github.io/OlympicArena/" target="_blank">Website</a> &nbsp; | &nbsp;
-  📤 <a href="#submit-your-result" target="_self">Submit</a>
+  📤 <a href="https://huggingface.co/spaces/GAIR/OlympicArenaSubmission" target="_self">Submit</a>
 </p>
 
 ## Contents
