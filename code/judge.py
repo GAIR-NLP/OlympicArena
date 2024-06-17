@@ -458,8 +458,8 @@ class Judger:
     
 if __name__ == "__main__":
     judger = Judger()
-    pred = "\\boxed{v = \\sqrt{G \\frac{M^2}{L (M + m)}}}"
-    gold = "$M \\sqrt{\\frac{G}{(M+m) L}}$"
+    pred = "\\boxed{[A,B]}"
+    gold = "A,B"
 
-    print(judger.auto_judge_debug(pred, gold))
+    print(judger.auto_judge(pred, gold))
     
