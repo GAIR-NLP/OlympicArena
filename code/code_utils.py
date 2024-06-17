@@ -53,16 +53,12 @@ def convert_to_list_of_dicts(input_output_dict):
     
     return [{"input": inp, "output": out} for inp, out in zip(input_list, output_list)]
 
-
 def code_executor(codes, test_cases):
-    test_cases = convert_to_list_of_dicts(test_cases)
-    code_test_pairs = [(code, test_cases) for code in codes]
-    results = []
-    
-    for pair in code_test_pairs:
-        result = execute_code(pair)
-        results.append(result)
-    
+    with multiprocessing.Pool() as pool: 
+        if not isinstance(test_cases, list):
+            test_cases = convert_to_list_of_dicts(test_cases) # Convert to list of dicts
+        code_test_pairs = [(code, test_cases) for code in codes]
+        results = pool.map(execute_code, code_test_pairs)
     return results
 
 class TimeoutException(Exception):
