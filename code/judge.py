@@ -67,16 +67,14 @@ class Judger:
                 elif text[end_index] == '}':
                     stack -= 1
                 end_index += 1
-                if stack == 0:
-                    content = text[start_index:end_index - 1]
-                    if not content:
-                        return text
-                    else:
-                        content = self.normalize_answer(content)
-                        return content
-            return text
-        else:
-            return text
+            if stack == 0:
+                content = text[start_index:end_index - 1]
+                if not content:
+                    return text
+                else:
+                    content = self.normalize_answer(content)
+                    return content
+        return text
         
         
     def split_by_comma(self, expr: str):
