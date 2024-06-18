@@ -107,7 +107,7 @@ if __name__ == "__main__":
     
     args = parser.parse_args()
     
-    args.model_output_dir = os.path.join(args.model_output_dir, args.model)
+    args.model_output_dir = os.path.join(args.model_output_dir, args.model, args.split)
     os.makedirs(args.model_output_dir, exist_ok=True)
     
     # load data

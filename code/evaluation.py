@@ -143,11 +143,11 @@ if __name__ == "__main__":
     
     args = parser.parse_args()
     
-    args.output_json_path = os.path.join(args.model_output_dir, args.model, args.model+"_"+args.split+".json")
+    args.output_json_path = os.path.join(args.model_output_dir, args.model, args.split, args.model+"_"+args.split+".json")
     assert os.path.exists(args.output_json_path), "The model's output json file doesn't exist!"
     output_json = read_json(args.output_json_path)
     
-    args.result_dir = os.path.join(args.result_dir, args.model)
+    args.result_dir = os.path.join(args.result_dir, args.model, args.split)
     os.makedirs(args.result_dir, exist_ok=True)
     
     # load data
