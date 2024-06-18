@@ -6,13 +6,11 @@ from models import *
 from judge import Judger
 
 def get_model(model_name, args):
-    model_classes = {
-        "gpt-4o": GPT_4o(api_key=args.api_key, base_url=args.base_url, mode="multi-modal"),
-        # Add more models here as needed
-    }
-    if model_name not in model_classes:
+    if model_name == "gpt-4o":
+        return GPT_4o(api_key=args.api_key, base_url=args.base_url, mode="multi-modal")
+    else:
         raise ValueError(f"Unknown model: {model_name}")
-    return model_classes[model_name]
+
 
 def inference(args, datasets):
     non_cs_inference_tasks = []
