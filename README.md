@@ -161,11 +161,11 @@ If you encounter any question about our work, please do not hesitate to submit a
 If you do find our code helpful or use our benchmark dataset, please citing our paper.
 
 ```
-@misc{huang2024olympicarena,
-      title={OlympicArena: Benchmarking Multi-discipline Cognitive Reasoning for Superintelligent AI}, 
+@article{huang2024olympicarena,
+      title={OlympicArena: Benchmarking Multi-discipline Cognitive Reasoning for Superintelligent AI},
       author={Zhen Huang and Zengzhi Wang and Shijie Xia and Xuefeng Li and Haoyang Zou and Ruijie Xu and Run-Ze Fan and Lyumanshan Ye and Ethan Chern and Yixin Ye and Yikai Zhang and Yuqing Yang and Ting Wu and Binjie Wang and Shichao Sun and Yang Xiao and Yiyuan Li and Fan Zhou and Steffi Chern and Yiwei Qin and Yan Ma and Jiadi Su and Yixiu Liu and Yuxiang Zheng and Shaoting Zhang and Dahua Lin and Yu Qiao and Pengfei Liu},
       year={2024},
-      eprint={2406.12753},
-      archivePrefix={arXiv},
+      journal={arXiv preprint arXiv:2406.12753},
+      url={https://arxiv.org/abs/2406.12753}
 }
 ```
