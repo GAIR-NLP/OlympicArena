@@ -3,7 +3,7 @@
 <p align="center"> <img src="images/logo.jpg" style="width: 75%;" id="title-icon">       </p>
 
 <p align="center">
-  📄 <a href="https://github.com/GAIR-NLP/OlympicArena" target="_blank">Paper</a> &nbsp; | &nbsp;
+  📄 <a href="https://arxiv.org/pdf/2406.12753" target="_blank">Paper</a> &nbsp; | &nbsp;
   🤗 <a href="https://huggingface.co/datasets/GAIR/OlympicArena" target="_blank">Hugging Face</a> &nbsp; | &nbsp;
   🌐 <a href="https://gair-nlp.github.io/OlympicArena/" target="_blank">Website</a> &nbsp; | &nbsp;
   📤 <a href="https://huggingface.co/spaces/GAIR/OlympicArenaSubmission" target="_self">Submit</a>
