@@ -114,22 +114,21 @@ def calculate_statistics(result_json):
     
     return total_rate, subject_rate, language_rate, modality_rate
         
-        
 def print_statistics(total_rate, subject_rate, language_rate, modality_rate):
     print("---------------------------")
-    print("Total correct rate: ", total_rate)
+    print("Total correct rate: {:.2f}".format(total_rate * 100))
     print("---------------------------")
     print("Subject correct rate: ")
     for key, value in subject_rate.items():
-        print(key, value)
+        print("{}: {:.2f}".format(key, value * 100))
     print("---------------------------")
     print("Language correct rate: ")
     for key, value in language_rate.items():
-        print(key, value)
+        print("{}: {:.2f}".format(key, value * 100))
     print("---------------------------")
     print("Modality correct rate: ")
     for key, value in modality_rate.items():
-        print(key, value)
+        print("{}: {:.2f}".format(key, value * 100))
         
         
 if __name__ == "__main__":
