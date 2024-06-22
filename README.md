@@ -6,7 +6,8 @@
   📄 <a href="https://arxiv.org/pdf/2406.12753" target="_blank">Paper</a> &nbsp; | &nbsp;
   🤗 <a href="https://huggingface.co/datasets/GAIR/OlympicArena" target="_blank">Hugging Face</a> &nbsp; | &nbsp;
   🌐 <a href="https://gair-nlp.github.io/OlympicArena/" target="_blank">Website</a> &nbsp; | &nbsp;
-  📤 <a href="https://huggingface.co/spaces/GAIR/OlympicArenaSubmission" target="_self">Submit</a>
+  📤 <a href="https://huggingface.co/spaces/GAIR/OlympicArenaSubmission" target="_self">Submit</a> &nbsp; | &nbsp;
+  📘 <a href="https://mp.weixin.qq.com/s/M16i34Vejq9DruMvfYsOtA" target="_blank">Blog (ZH)</a>
 </p>
 
 ## Contents
