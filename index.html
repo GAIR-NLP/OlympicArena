@@ -288,7 +288,7 @@
               <tr style="background-color: rgba(117, 209, 215, 0.1);">
                 <td style="text-align: left;">
                   <a href="https://openai.com/index/hello-gpt-4o/">
-                      <b>GPT-4o 🥇</b>
+                      <b>GPT-4o</b>
                   </a>
                 </td>
                 <td>LMM</td>
@@ -608,7 +608,7 @@
               <tr style="background-color: rgba(117, 209, 215, 0.1);">
                 <td style="text-align: left;">
                   <a href="https://www.anthropic.com/news/claude-3-5-sonnet">
-                      <b>Claude-3.5-Sonnet 🥈</b>
+                      <b>Claude-3.5-Sonnet</b>
                   </a>
                 </td>
                 <td>LMM</td>
@@ -630,7 +630,7 @@
               <tr style="background-color: rgba(117, 209, 215, 0.1);">
                 <td style="text-align: left;">
                   <a href="https://ai.google.dev/gemini-api">
-                      <b>Gemini-1.5-Pro 🥉</b>
+                      <b>Gemini-1.5-Pro</b>
                   </a>
                 </td>
                 <td>LMM</td>
@@ -674,7 +674,7 @@
               <tr style="background-color: rgba(117, 209, 215, 0.1);">
                 <td style="text-align: left;">
                   <a href="https://openai.com/index/hello-gpt-4o/">
-                      <b>GPT-4o 🥇</b>
+                      <b>GPT-4o</b>
                   </a>
                 </td>
                 <td>LMM</td>
@@ -966,7 +966,7 @@
               <tr style="background-color: rgba(117, 209, 215, 0.1);">
                 <td style="text-align: left;">
                   <a href="https://www.anthropic.com/news/claude-3-5-sonnet">
-                      <b>Claude-3.5-Sonnet 🥈</b>
+                      <b>Claude-3.5-Sonnet</b>
                   </a>
                 </td>
                 <td>LMM</td>
@@ -988,7 +988,7 @@
               <tr style="background-color: rgba(117, 209, 215, 0.1);">
                 <td style="text-align: left;">
                   <a href="https://ai.google.dev/gemini-api">
-                      <b>Gemini-1.5-Pro 🥉</b>
+                      <b>Gemini-1.5-Pro</b>
                   </a>
                 </td>
                 <td>LMM</td>
@@ -1010,7 +1010,40 @@
             </table>
               
           </div>
-          <p>In addition to presenting scores by discipline, we also display scores by language (EN: English, ZH: Chinese) and by modality. Results marked with an asterisk (*) are provided by the authors. If you wish to have your model's results featured on our website's leaderboard (either val or test), please contact us via email at <a href="mailto:gair.olympicarena@gmail.com">gair.olympicarena@gmail.com</a> with your Submission ID and results.</p>
+        </div>
+        <p>In addition to presenting scores by discipline, we also display scores by language (EN: English, ZH: Chinese) and by modality. Results marked with an asterisk (*) are provided by the authors. If you wish to have your model's results featured on our website's leaderboard (either val or test), please contact us via email at <a href="mailto:gair.olympicarena@gmail.com">gair.olympicarena@gmail.com</a> with your Submission ID and results.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 id="medal-leaderboard-title" class="title is-3">🏅 Medal Rank</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            The OlympicArena Medal Table, similar to the medal system used in the Olympic Games, is a pioneering ranking mechanism specifically designed to evaluate the performance of AI models across
+            various academic disciplines. This table awards medals to models that achieve the top three scores in any given
+            discipline, thereby providing a clear and competitive framework for comparing different models. Specifically, we
+            rank AI models by Gold medals first, then by overall scores if tied. It offers a straightforward and intuitive way to
+            identify leading models in distinct academic fields, making it easier for researchers and developers to understand
+            the strengths and weaknesses of different models.
+          </p>
+          <p>
+            Note: The medal table is generated based on the leaderboard scores of the test set.
+          </p>
+
+        </div>
+
+
+        <div id="medal-leaderboard" class="content">
+          <table id="medal-leaderboard-table">
+            <!-- Medal leaderboard will be generated here -->
+          </table>
         </div>
       </div>
     </div>
@@ -1082,9 +1115,10 @@
       button.innerHTML = "<b style='font-size: larger;'>Validation Set Leaderboard</b> (Click to Switch)";
     }
   }
+
   function sortTableByOverall(tableId) {
     var table = document.getElementById(tableId);
-    var rows = Array.from(table.rows).slice(1); 
+    var rows = Array.from(table.rows).slice(1);
 
     rows.sort(function(a, b) {
       var cellA = parseFloat(a.cells[3].innerText);
@@ -1098,43 +1132,116 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    var tables = document.querySelectorAll('table');
-
-    tables.forEach(function(table) {
-      if (!table) return;
-
-      var initialRows = Array.from(table.rows).slice(1);
-      table.addEventListener('click', function(event) {
-        var clickedCell = event.target.closest('td, th');
-        if (!clickedCell) return;
-        var headerRow = clickedCell.parentNode;
-        var columnIndex = Array.from(headerRow.cells).indexOf(clickedCell);
-        var type = clickedCell.getAttribute('data-type');
-
-        if (headerRow.rowIndex === 0) {
-          if (columnIndex === 0) {
-            table.tBodies[0].innerHTML = '';
-            initialRows.forEach(row => table.tBodies[0].appendChild(row.cloneNode(true)));
-          }
-        }
-      });
-    });
-
-    // Initial sorting of the tables by "Overall" column
     sortTableByOverall('table1');
     sortTableByOverall('table2');
   });
 
-  function toggleTables () {
-      var table1 = document.getElementById('table1');
-      var table2 = document.getElementById('table2');
-      table1.classList.toggle('hidden');
-      table2.classList.toggle('hidden');
+  function toggleTables() {
+    var table1 = document.getElementById('table1');
+    var table2 = document.getElementById('table2');
+    table1.classList.toggle('hidden');
+    table2.classList.toggle('hidden');
   }
 
-  document.getElementById('toggleButton').addEventListener('click', toggleTables);
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('toggleButton').addEventListener('click', toggleTables);
+  });
+
+  function addMedalsToLeaderboard(tableId) {
+    const table = document.getElementById(tableId);
+    const rows = Array.from(table.rows).slice(1);
+
+    rows.sort((a, b) => parseFloat(b.cells[3].innerText) - parseFloat(a.cells[3].innerText));
+
+    rows.forEach((row, index) => {
+      const modelNameCell = row.cells[0];
+      let medal = '';
+      if (index === 0) {
+        medal = ' 🥇';
+      } else if (index === 1) {
+        medal = ' 🥈';
+      } else if (index === 2) {
+        medal = ' 🥉';
+      }
+      modelNameCell.innerHTML += medal;
+    });
+
+    rows.forEach(row => {
+      table.tBodies[0].appendChild(row);
+    });
+  }
+
+  function calculateMedalCounts() {
+    const table = document.getElementById('table2');
+    const rows = Array.from(table.rows).slice(1);
+
+    const medalCounts = {};
+
+    rows.forEach(row => {
+      const modelName = row.cells[0].innerText.trim().replace(/ 🥇| 🥈| 🥉/g, '');
+      if (!medalCounts[modelName]) {
+        medalCounts[modelName] = { gold: 0, silver: 0, bronze: 0, overall: parseFloat(row.cells[3].innerText) };
+      }
+    });
+
+    const disciplines = ['Math', 'Physics', 'Chemistry', 'Biology', 'Geography', 'Astronomy', 'CS'];
+    disciplines.forEach((discipline, index) => {
+      const scores = rows.map(row => ({
+        model: row.cells[0].innerText.trim().replace(/ 🥇| 🥈| 🥉/g, ''),
+        score: parseFloat(row.cells[4 + index].innerText)
+      }));
+      scores.sort((a, b) => b.score - a.score);
+      
+      if (scores.length > 0) medalCounts[scores[0].model].gold += 1;
+      if (scores.length > 1) medalCounts[scores[1].model].silver += 1;
+      if (scores.length > 2) medalCounts[scores[2].model].bronze += 1;
+    });
+
+    const sortedMedalCounts = Object.entries(medalCounts).sort((a, b) => {
+      if (b[1].gold !== a[1].gold) return b[1].gold - a[1].gold;
+      return b[1].overall - a[1].overall;
+    });
+
+    return sortedMedalCounts;
+  }
+
+  function generateMedalLeaderboard() {
+    const sortedMedalCounts = calculateMedalCounts();
+
+    const table = document.createElement('table');
+    <!-- table.classList.add('js-sort-table'); -->
+
+    const headerRow = table.insertRow();
+    ['Rank', 'Model', 'Gold', 'Silver', 'Bronze', 'Overall'].forEach(text => {
+      const cell = document.createElement('th');
+      cell.textContent = text;
+      headerRow.appendChild(cell);
+    });
+
+    sortedMedalCounts.forEach(([model, counts], index) => {
+      const row = table.insertRow();
+      row.insertCell().textContent = index + 1;
+      row.insertCell().textContent = model;
+      row.insertCell().textContent = counts.gold;
+      row.insertCell().textContent = counts.silver;
+      row.insertCell().textContent = counts.bronze;
+      row.insertCell().textContent = counts.overall;
+    });
+
+    const container = document.getElementById('medal-leaderboard');
+    container.innerHTML = '';
+    container.appendChild(table);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    addMedalsToLeaderboard('table1');
+    addMedalsToLeaderboard('table2');
+    generateMedalLeaderboard();
+  });
+
 
 </script>
+
 
 
 
