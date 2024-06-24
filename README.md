@@ -10,6 +10,13 @@
   📘 <a href="https://mp.weixin.qq.com/s/M16i34Vejq9DruMvfYsOtA" target="_blank">Blog (ZH)</a>
 </p>
 
+## 🔥News
+
+- [2024/06/24] A brand new technical report comparing the performance of Claude-3.5-Sonnet and GPT-4o on OlympicArena has been released at [this link](https://github.com/GAIR-NLP/OlympicArena/blob/main/resources/medal_ranks.pdf).
+- [2024/06/22] We test the latest Gemini-1.5-Pro and Claude-3.5-Sonnet models and add them to the leaderboard.
+
+
+
 ## Contents
 
 - [Introduction](#introduction)
@@ -20,6 +27,7 @@
   - [Evaluation](#evaluation)
   - [Submit your result](#submit-your-result)
 - [Citation](#citation)
+
 
 
 ## Introduction
