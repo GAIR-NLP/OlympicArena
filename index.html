@@ -244,7 +244,7 @@
 </section>
 
 <section class="section">
-  <div class="container">
+  <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 id="leaderboard" class="title is-3">🏟️ Leaderboard</h2>
@@ -260,6 +260,7 @@
           </div>
 
           <button id="toggleButton" onclick="changeButtonText()"><b style='font-size: larger;'>Validation Set Leaderboard</b> (Click to Switch)</button>
+          
           <div class="model-labels-container">
             <span class="leaderboard-label" style="background-color: rgba(249, 242, 248, 1);">Open-Source</span>
             <span class="leaderboard-label" style="background-color: rgba(117, 209, 215, 0.1);">Proprietary</span>
@@ -650,6 +651,9 @@
                 <td>28.67</td>
               </tr>
 
+              
+
+
 
             </table>
             <!-- Test Set Leaderboard -->
@@ -1008,6 +1012,7 @@
                 <td>34.23</td>
               </tr>
 
+
             </table>
               
           </div>
@@ -1213,7 +1218,7 @@
     <!-- table.classList.add('js-sort-table'); -->
 
     const headerRow = table.insertRow();
-    ['Rank', 'Model', 'Gold', 'Silver', 'Bronze', 'Overall'].forEach(text => {
+    ['Rank', 'Model', 'Gold', 'Silver', 'Bronze', 'Total', 'Overall'].forEach(text => {
       const cell = document.createElement('th');
       cell.textContent = text;
       headerRow.appendChild(cell);
@@ -1226,6 +1231,7 @@
       row.insertCell().textContent = counts.gold;
       row.insertCell().textContent = counts.silver;
       row.insertCell().textContent = counts.bronze;
+      row.insertCell().textContent = counts.gold + counts.silver + counts.bronze;
       row.insertCell().textContent = counts.overall;
     });
 
