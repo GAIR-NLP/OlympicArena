@@ -7,14 +7,14 @@
   🤗 <a href="https://huggingface.co/datasets/GAIR/OlympicArena" target="_blank">Hugging Face</a> &nbsp; | &nbsp;
   🌐 <a href="https://gair-nlp.github.io/OlympicArena/" target="_blank">Website</a> &nbsp; | &nbsp;
   📤 <a href="https://huggingface.co/spaces/GAIR/OlympicArenaSubmission" target="_self">Submit</a> &nbsp; | &nbsp;
-  📘 <a href="https://mp.weixin.qq.com/s/M16i34Vejq9DruMvfYsOtA" target="_blank">Blog (ZH)</a>
+  📘 <a href="https://mp.weixin.qq.com/s/M16i34Vejq9DruMvfYsOtA" target="_blank">机器之心</a>
 </p>
 
 ## 🔥News
 - [2024/06/26] We test ByteDance's Doubao-pro-32k model and find that it achieves remarkably high scores on Chinese problems.
-- [2024/06/24] A brand new technical report comparing the performance of Claude-3.5-Sonnet and GPT-4o on OlympicArena has been released at [this link](https://arxiv.org/pdf/2406.16772).
+- [2024/06/24] A brand new technical report comparing the performance of Claude-3.5-Sonnet and GPT-4o on OlympicArena has been released at [this link](https://arxiv.org/pdf/2406.16772) and [机器之心](https://mp.weixin.qq.com/s/YdGPDE5Jgp3vnWCxrwMsgA).
 - [2024/06/22] We test the latest Gemini-1.5-Pro and Claude-3.5-Sonnet models and add them to the leaderboard.
-
+- [2024/06/20] Our work is featured by [机器之心](https://mp.weixin.qq.com/s/M16i34Vejq9DruMvfYsOtA) on Wechat!
 
 
 ## Contents
