@@ -252,7 +252,10 @@
 
           <div class="content has-text-justified">
             <p>
-              We evaluate various models, including LLMs and LMMs, considering both closed- and open-source versions. All experiments utilize zero-shot prompts, specifically tailored to each answer type and specifying output formats to facilitate answer extraction and rule-based matching. Here is the leaderboard for our benchmark's validation and test sets.
+              We evaluate various models, including LLMs and LMMs, considering both closed- and open-source versions. All experiments utilize zero-shot prompts, specifically tailored to each answer type and specifying output formats to facilitate answer extraction and rule-based matching.
+            </p>
+            <p>
+              For CS problems, we set the inference temperature to 0.2 to obtain multiple and diverse candidate results, while for all other disciplines, the temperature is set to 0.0. Additionally, we set the maximum length of output tokens to 2048. Here is the leaderboard for our benchmark's validation and test sets.
             </p>
             <p>
               Note: The results reported in the paper are based on the combined outcomes from the validation and test sets, as well as some additional problems evaluated by the models. Therefore, they may slightly differ from the data presented below.
@@ -673,6 +676,30 @@
                 <td>29.39</td>
               </tr>
 
+<!-- 
+              <tr style="background-color: rgba(249, 242, 248, 1);">
+                <td style="text-align: left;">
+                  <a href="https://github.com/deepseek-ai/DeepSeek-Coder-V2">
+                      <b>DeepSeek-Coder-V2</b>
+                  </a>
+                </td>
+                <td>LLM</td>
+                <td>2024-6-26</td>
+                <td>29.31</td>
+                <td>29.51</td>
+                <td>26.67</td>
+                <td>23.08</td>
+                <td>33.33</td>
+                <td>35.29</td>
+                <td>32.22</td>
+                <td>6.67</td>
+                <td>27.79</td>
+                <td>30.94</td>
+                <td>32.03</td>
+                <td>25.81</td>
+              </tr>
+ -->
+
 
 
             </table>
@@ -1053,7 +1080,29 @@
                 <td>37.11</td>
                 <td>33.23</td>
               </tr>
-
+<!-- 
+              <tr style="background-color: rgba(249, 242, 248, 1);">
+                <td style="text-align: left;">
+                  <a href="https://github.com/deepseek-ai/DeepSeek-Coder-V2">
+                      <b>DeepSeek-Coder-V2</b>
+                  </a>
+                </td>
+                <td>LLM</td>
+                <td>2024-6-26</td>
+                <td>34.14</td>
+                <td>25.19</td>
+                <td>27.48</td>
+                <td>42.25</td>
+                <td>42.41</td>
+                <td>43.69</td>
+                <td>36.13</td>
+                <td>7.50</td>
+                <td>36.58</td>
+                <td>30.07</td>
+                <td>37.11</td>
+                <td>30.36</td>
+              </tr>
+ -->
             </table>
               
           </div>
@@ -1069,7 +1118,9 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 id="medal-leaderboard-title" class="title is-3">🏅 Medal Rank</h2>
+        <h2 id="medal-leaderboard-title" class="title is-3">
+          <img src="static/images/medal_table_logo.png" alt="Medal Rank" style="height: 125px; width: auto; vertical-align: middle;">
+        </h2>
 
         <div class="content has-text-justified">
           <p>
@@ -1256,12 +1307,34 @@
     const sortedMedalCounts = calculateMedalCounts();
 
     const table = document.createElement('table');
-    <!-- table.classList.add('js-sort-table'); -->
+    table.classList.add('table', 'is-striped', 'is-hoverable');
 
     const headerRow = table.insertRow();
-    ['Rank', 'Model', 'Gold', 'Silver', 'Bronze', 'Total', 'Overall'].forEach(text => {
+    headerRow.classList.add('header-row');
+
+    ['Rank', 'Model', 'Gold', 'Silver', 'Bronze', 'Total', 'Overall'].forEach((text, index) => {
       const cell = document.createElement('th');
-      cell.textContent = text;
+      cell.classList.add('header-cell');
+
+      if (text === 'Gold') {
+        const img = document.createElement('img');
+        img.src = 'static/images/gold_medal.png';
+        img.classList.add('medal-icon');
+        cell.appendChild(img);
+      } else if (text === 'Silver') {
+        const img = document.createElement('img');
+        img.src = 'static/images/silver_medal.png';
+        img.classList.add('medal-icon');
+        cell.appendChild(img);
+      } else if (text === 'Bronze') {
+        const img = document.createElement('img');
+        img.src = 'static/images/bronze_medal.png';
+        img.classList.add('medal-icon');
+        cell.appendChild(img);
+      } else {
+        cell.textContent = text;
+      }
+    
       headerRow.appendChild(cell);
     });
 
@@ -1347,6 +1420,25 @@
   }
 
   td:hover {background-color: #ffffff;}
+  
+  .medal-icon {
+    width: 20px;
+    height: 20px;
+  }
+  .ranking-icon {
+    width: 40px;
+    height: 20px;
+  }
+  .header-cell {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .header-row th{
+    background-color: #fff9c4;
+  }
+
 </style>
 
 
