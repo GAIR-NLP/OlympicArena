@@ -676,7 +676,7 @@
                 <td>29.39</td>
               </tr>
 
-<!-- 
+
               <tr style="background-color: rgba(249, 242, 248, 1);">
                 <td style="text-align: left;">
                   <a href="https://github.com/deepseek-ai/DeepSeek-Coder-V2">
@@ -698,7 +698,7 @@
                 <td>32.03</td>
                 <td>25.81</td>
               </tr>
- -->
+
 
 
 
@@ -1080,7 +1080,7 @@
                 <td>37.11</td>
                 <td>33.23</td>
               </tr>
-<!-- 
+
               <tr style="background-color: rgba(249, 242, 248, 1);">
                 <td style="text-align: left;">
                   <a href="https://github.com/deepseek-ai/DeepSeek-Coder-V2">
@@ -1102,7 +1102,7 @@
                 <td>37.11</td>
                 <td>30.36</td>
               </tr>
- -->
+
             </table>
               
           </div>
@@ -1126,8 +1126,9 @@
           <p>
             The OlympicArena Medal Table, similar to the medal system used in the Olympic Games, is a pioneering ranking mechanism specifically designed to evaluate the performance of AI models across
             various academic disciplines. This table awards medals to models that achieve the top three scores in any given
-            discipline, thereby providing a clear and competitive framework for comparing different models. Specifically, we
-            rank AI models by Gold medals first, then by overall scores if tied. It offers a straightforward and intuitive way to
+            discipline, thereby providing a clear and competitive framework for comparing different models. Specifically, We 
+            rank AI models first by the number of Gold medals, then by the number of Silver medals, followed by the number of Bronze medals, and finally by the overall score if there are still ties. 
+            It offers a straightforward and intuitive way to
             identify leading models in distinct academic fields, making it easier for researchers and developers to understand
             the strengths and weaknesses of different models.
           </p>
@@ -1297,6 +1298,8 @@
 
     const sortedMedalCounts = Object.entries(medalCounts).sort((a, b) => {
       if (b[1].gold !== a[1].gold) return b[1].gold - a[1].gold;
+      if (b[1].silver !== a[1].silver) return b[1].silver - a[1].silver;
+      if (b[1].bronze !== a[1].bronze) return b[1].bronze - a[1].bronze;
       return b[1].overall - a[1].overall;
     });
 
