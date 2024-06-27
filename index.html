@@ -244,6 +244,7 @@
 </section>
 
 <section class="section">
+
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -269,9 +270,18 @@
             <span class="leaderboard-label" style="background-color: rgba(117, 209, 215, 0.1);">Proprietary</span>
           </div>
 
-          <div style="overflow-x: auto;">
-            <!-- Validation Set Leaderboard -->
-            <table id="table1" class="js-sort-table">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <div style="overflow-x: auto;">
+          <!-- Validation Set Leaderboard -->
+          <div style="min-width: 100%; display: flex;">
+            <table id="table1" class="js-sort-table table">
               <tr>
                 <td class="js-sort-number" style="min-width: 160px;"><strong>Model</strong></td>
                 <td class="js-sort-string"><strong>Setting</strong></td>
@@ -704,7 +714,7 @@
 
             </table>
             <!-- Test Set Leaderboard -->
-            <table id="table2" class="js-sort-table hidden">
+            <table id="table2" class="js-sort-table table hidden">
               <tr>
                 <td class="js-sort-number" style="min-width: 160px;"><strong>Model</strong></td>
                 <td class="js-sort-string"><strong>Setting</strong></td>
@@ -1104,13 +1114,23 @@
               </tr>
 
             </table>
-              
           </div>
         </div>
+
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
         <p>In addition to presenting scores by discipline, we also display scores by language (EN: English, ZH: Chinese) and by modality. Results marked with an asterisk (*) are provided by the authors. If you wish to have your model's results featured on our website's leaderboard (either val or test), please contact us via email at <a href="mailto:gair.olympicarena@gmail.com">gair.olympicarena@gmail.com</a> with your Submission ID and results.</p>
       </div>
     </div>
   </div>
+
+
 </section>
 
 
@@ -1441,6 +1461,24 @@
   .header-row th{
     background-color: #fff9c4;
   }
+  .columns {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .column {
+    flex: 1;
+    min-width: 100%;
+  }
+
+  table {
+    width: max-content;
+    min-width: 100%;
+  }
+
+
 
 </style>
 
