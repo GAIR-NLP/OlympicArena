@@ -6,8 +6,10 @@ from models import *
 from judge import Judger
 
 def get_model(model_name, args):
-    if model_name == "gpt-4o":
+    if model_name == "gpt-4o": # an example proprietary model
         return GPT_4o(api_key=args.api_key, base_url=args.base_url, mode="multi-modal")
+    elif model_name == "qwen2-72b-instruct": # an example open-source model
+        return Qwen2(model_path="Qwen/Qwen2-72B-Instruct") # huggingface model id or local path
     else:
         raise ValueError(f"Unknown model: {model_name}")
 
