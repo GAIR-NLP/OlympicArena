@@ -156,6 +156,7 @@ Finally, we will print the overall accuracy, accuracy for different subjects, ac
 
 If you want to test your own model's performance on the test set, you can use our submit platform.
 
+Two different submission methods are supported:
 
 1. Direct Submission on the Platform:
 
