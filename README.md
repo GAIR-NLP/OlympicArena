@@ -6,7 +6,7 @@
   📄 <a href="https://arxiv.org/pdf/2406.12753" target="_blank">Paper</a> &nbsp; | &nbsp;
   🤗 <a href="https://huggingface.co/datasets/GAIR/OlympicArena" target="_blank">Hugging Face</a> &nbsp; | &nbsp;
   🌐 <a href="https://gair-nlp.github.io/OlympicArena/" target="_blank">Website</a> &nbsp; | &nbsp;
-  📤 <a href="https://huggingface.co/spaces/GAIR/OlympicArenaSubmission" target="_self">Submit</a> &nbsp; | &nbsp;
+  📤 <a href="#submit-your-result" target="_self">Submit</a> &nbsp; | &nbsp;
   📘 <a href="https://mp.weixin.qq.com/s/M16i34Vejq9DruMvfYsOtA" target="_blank">机器之心</a>
 </p>
 
@@ -153,7 +153,27 @@ Finally, we will print the overall accuracy, accuracy for different subjects, ac
 
 ### Submit your result
 
-If you want to test your own model's performance on the test set, you can submit your JSON file to our [submission platform](https://huggingface.co/spaces/GAIR/OlympicArenaSubmission). Detailed format instructions are available on the submission platform. We strongly recommend using the code framework provided in this repository for inference, as it will generate the required JSON file that can be directly submitted to the platform.
+If you want to test your own model's performance on the test set, you can submit your JSON file to our [submission platform](https://huggingface.co/spaces/GAIR/OlympicArenaSubmission). 
+
+1. Direct Submission on the Platform:
+
+- Click "login in with Hugging Face," then upload your result file.
+
+2. Command Line Submission:
+
+- First, install the required library:
+
+    ```bash
+    pip install git+https://github.com/huggingface/competitions
+    ```
+
+- Then use the following command:
+
+    ```bash
+    competitions submit --competition_id GAIR/OlympicArenaSubmission --submission YOUR_RESULT_JSON_PATH --comment COMMENT --token YOUR_HF_READ_TOKEN
+    ```
+
+Detailed format instructions are available on the submission platform. We strongly recommend using the code framework provided in this repository for inference, as it will generate the required JSON file that can be directly submitted to the platform.
 
 ### Annotation Interface
 
