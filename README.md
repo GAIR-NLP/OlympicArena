@@ -11,6 +11,7 @@
 </p>
 
 ## 🔥News
+- [2024/7/12] We have updated our submission platform. Firstly, the entire submission process is now anonymous; only the user can see their submitted scores, and they will not be visible to others. Secondly, we now support submissions via the command line.
 - [2024/06/27] We add the result of the Deepseek-Coder-V2 model to the leaderboard, and it demonstrates outstanding performance in Maths and CS!
 - [2024/06/26] We test ByteDance's Doubao-pro-32k model and find that it achieves remarkably high scores on Chinese problems.
 - [2024/06/24] A brand new technical report comparing the performance of Claude-3.5-Sonnet and GPT-4o on OlympicArena has been released at [this link](https://arxiv.org/pdf/2406.16772) and [机器之心](https://mp.weixin.qq.com/s/YdGPDE5Jgp3vnWCxrwMsgA).
@@ -153,11 +154,14 @@ Finally, we will print the overall accuracy, accuracy for different subjects, ac
 
 ### Submit your result
 
-If you want to test your own model's performance on the test set, you can submit your JSON file to our [submission platform](https://huggingface.co/spaces/GAIR/OlympicArenaSubmission). 
+If you want to test your own model's performance on the test set, you can use our submit platform.
+
 
 1. Direct Submission on the Platform:
 
-- Click "login in with Hugging Face," then upload your result file.
+- Go to the [submission platform](https://huggingface.co/spaces/GAIR/OlympicArenaSubmission) platform.
+
+- Click "login in with Hugging Face" on the competition page then upload your result file.
 
 2. Command Line Submission:
 
