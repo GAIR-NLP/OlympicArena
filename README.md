@@ -160,7 +160,7 @@ Two different submission methods are supported:
 
 1. Direct Submission on the Platform:
 
-- Go to the [submission platform](https://huggingface.co/spaces/GAIR/OlympicArenaSubmission) platform.
+- Go to the [submission platform](https://huggingface.co/spaces/GAIR/OlympicArenaSubmission).
 
 - Click "login in with Hugging Face" on the competition page then upload your result file.
 
