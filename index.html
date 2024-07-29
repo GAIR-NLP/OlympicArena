@@ -253,7 +253,7 @@
 
           <div class="content has-text-justified">
             <p>
-              We evaluate various models, including LLMs and LMMs, considering both closed- and open-source versions. All experiments utilize zero-shot prompts, specifically tailored to each answer type and specifying output formats to facilitate answer extraction and rule-based matching.
+              We evaluate various models, including LLMs and LMMs, considering both closed- and open-source versions. All experiments utilize zero-shot prompts, specifically tailored to each answer type and specifying output formats to facilitate answer extraction and rule-based matching. For the LLMs, we do not provide any image information, considering the potential hallucinations and instability in captions, which also allows for a better comparison with LMMs.
             </p>
             <p>
               For CS problems, we set the inference temperature to 0.2 to obtain multiple and diverse candidate results, while for all other disciplines, the temperature is set to 0.0. Additionally, we set the maximum length of output tokens to 2048. Note that some LMMs only support a single image input; in such cases, we input only the first image. For LMMs that require a compulsive image input, we use their corresponding text-only model when handling text-only problems. Here is the leaderboard for our benchmark's validation and test sets.
@@ -1456,10 +1456,10 @@
   
   
   <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <p>In addition to presenting scores by discipline, we also display scores by language (EN: English, ZH: Chinese) and by modality. Results marked with an asterisk (*) are provided by the authors. If you wish to have your model's results featured on our website's leaderboard (either val or test), please contact us via email at <a href="mailto:gair.olympicarena@gmail.com">gair.olympicarena@gmail.com</a> with your Submission ID and results.</p>
-      </div>
+    <div class="columns is-centered">
+        <div class="column is-four-fifths">
+            <p class="has-text-left">In addition to presenting scores by discipline, we also display scores by language (EN: English, ZH: Chinese) and by modality. Results marked with an asterisk (*) are provided by the authors. If you wish to have your model's results featured on our website's leaderboard (either val or test), please contact us via email at <a href="mailto:gair.olympicarena@gmail.com">gair.olympicarena@gmail.com</a> with your Submission ID and results.</p>
+        </div>
     </div>
   </div>
 
