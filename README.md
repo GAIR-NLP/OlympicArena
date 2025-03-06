@@ -13,7 +13,7 @@
 
 ## 🔥News
 
-- [2025/03/06] We have established a partnership with [AGI-Eval](https://agi-eval.cn/mvp/home) platform. All text-based subsets of OlympicArena are now available on [AGI-Eval](https://agi-eval.cn/evaluation/OlympicArena?id=34). Multimodal components are coming soon, and the platform will soon support more convenient submissions for testing (including validation set and training set).
+- [2025/03/06] We have established a partnership with [AGI-Eval](https://agi-eval.cn/mvp/home) platform. All text-based subsets of OlympicArena are now available on [AGI-Eval](https://agi-eval.cn/evaluation/OlympicArena?id=34). Multimodal components are coming soon, and the platform will soon support more convenient submissions for testing (including validation set and test set).
 - [2024/09/26] Our paper has been accepted by NeurIPS D&B Track 2024 🎉
 - [2024/07/12] We have updated our submission platform. Firstly, the entire submission process is now anonymous; only the user can see their submitted scores, and they will not be visible to others. Secondly, we now support submissions via the command line.
 - [2024/06/27] We add the result of the Deepseek-Coder-V2 model to the leaderboard, and it demonstrates outstanding performance in Maths and CS!
