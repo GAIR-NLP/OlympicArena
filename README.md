@@ -7,11 +7,13 @@
   🤗 <a href="https://huggingface.co/datasets/GAIR/OlympicArena" target="_blank">Hugging Face</a> &nbsp; | &nbsp;
   🌐 <a href="https://gair-nlp.github.io/OlympicArena/" target="_blank">Website</a> &nbsp; | &nbsp;
   📤 <a href="#submit-your-result" target="_self">Submit</a> &nbsp; | &nbsp;
-  📘 <a href="https://mp.weixin.qq.com/s/M16i34Vejq9DruMvfYsOtA" target="_blank">机器之心</a>
+  📘 <a href="https://mp.weixin.qq.com/s/M16i34Vejq9DruMvfYsOtA" target="_blank">机器之心</a> &nbsp; | &nbsp;
+  🧪 <a href="https://agi-eval.cn/evaluation/OlympicArena?id=34" target="_blank">AGI-Eval</a>
 </p>
 
 ## 🔥News
 
+- [2025/03/06] We have established a partnership with [AGI-Eval](https://agi-eval.cn/mvp/home) platform. All text-based subsets of OlympicArena are now available on [AGI-Eval](https://agi-eval.cn/evaluation/OlympicArena?id=34). Multimodal components are coming soon, and the platform will soon support more convenient submissions for testing (including validation set and training set).
 - [2024/09/26] Our paper has been accepted by NeurIPS D&B Track 2024 🎉
 - [2024/07/12] We have updated our submission platform. Firstly, the entire submission process is now anonymous; only the user can see their submitted scores, and they will not be visible to others. Secondly, we now support submissions via the command line.
 - [2024/06/27] We add the result of the Deepseek-Coder-V2 model to the leaderboard, and it demonstrates outstanding performance in Maths and CS!
@@ -19,6 +21,7 @@
 - [2024/06/24] A brand new technical report comparing the performance of Claude-3.5-Sonnet and GPT-4o on OlympicArena has been released at [this link](https://arxiv.org/pdf/2406.16772) and [机器之心](https://mp.weixin.qq.com/s/YdGPDE5Jgp3vnWCxrwMsgA).
 - [2024/06/22] We test the latest Gemini-1.5-Pro and Claude-3.5-Sonnet models and add them to the leaderboard.
 - [2024/06/20] Our work is featured by [机器之心](https://mp.weixin.qq.com/s/M16i34Vejq9DruMvfYsOtA) on Wechat!
+
 
 
 ## Contents
